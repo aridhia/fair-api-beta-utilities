@@ -112,7 +112,7 @@ export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 
 ## Testing the API
 
-Then, to test the API is up and running at all use the script `fair-api-health.py`:
+Then, to test the API is up and running at all use the script [`fair-api-health.py`](fair-api-health.py):
 ```sh
 python fair-api-health.py
 ```
@@ -123,7 +123,7 @@ API health check succeeded
 ```
 This will fail if the endpoint `/api/health` fails to return a HTTP success code of 200.
 
-To test the token works, run the script `fair-api-datasets-list.py`:
+To test the token works, run the script [`fair-api-datasets-list.py`](fair-api-datasets-list.py):
 ```sh
 python fair-api-datasets-list.py
 ```
@@ -147,7 +147,7 @@ Datasets are created using HTTP `POST` operations. The server validates the payl
 
 Technically the `POST` call can create multiple datasets, but the python script assumes that only one is created.
 
-For example, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json)
+For example, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json) - see [`fair-api-datasets-create.py`](fair-api-datasets-create.py).
 
 ```sh
 python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_dataset.json
@@ -163,7 +163,7 @@ View on the web at: https://fair.uksouth.preview-mca.aridhia.io/#/data/datasets/
 
 ## Search for Metadata (API)
 
-The search API be used to find datasets based on search terms.
+The search API be used to find datasets based on search terms - see [`fair-api-search.py`](fair-api-search.py).
 
 ```sh
 python fair-api-search.py <search terms>
