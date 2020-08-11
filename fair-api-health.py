@@ -13,7 +13,7 @@ FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
 
 health_endpoint = f'{FAIR_API_ENDPOINT}/api/health'
-print(f'Testing API endpoint: {health_endpoint')
+print(f'Testing API endpoint: {health_endpoint}')
 
 r = requests.get(health_endpoint)
 if r.status_code != 200:

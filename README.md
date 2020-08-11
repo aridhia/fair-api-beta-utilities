@@ -15,7 +15,7 @@ As a data owner, depositing data and metadata:
 
 As a data consumer, finding and querying data:
 
-- Seach for metadata
+- Search for metadata
 - Read and download metadata
 - Query and download data (API only, beta)
 
@@ -109,6 +109,8 @@ export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX
 export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 ```
 
+## Testing the API
+
 Then, to test the API is up and running at all use the script `fair-api-health.py`:
 ```sh
 python fair-api-health.py
@@ -126,7 +128,7 @@ python fair-api-datasets-list.py
 ```
 The output should look something like:
 ```
-Datasets at endpoint: https://fair.uksouth.preview-mca.aridhia.io//api/datasets
+Datasets at endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/datasets
 Found 27 datasets
 ...
 avocado_prices - Avocado Prices
@@ -137,7 +139,34 @@ avocado_prices - Avocado Prices
 
 In order to create metadata using the API, a JSON file should be created, conformed to the standard. This can then be posted to the service to create the dataset.
 
+Datasets are created using HTTP `POST` operations. The server validates the payload and looks for a dataset identifier in it - in the `catalogue` > `id` structure:
+
+- If the `id` is present it is tested for uniqueness: if it already exists an error will be returned. 
+- If the `id` is absent a new one is generated. The user should be careful not to create many copies of the same metadata
+
+Technically the `POST` call can create multiple datasets, but the python script assumes that only one is created.
+
 For example, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json)
+
+```sh
+python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_dataset.json
+```
+If successful, the output should look something like:
+```
+
+```
+> Tip: During the beta testing, it can be useful to create a dataset using the API but delete it either using an HTTP `DELETE` call or using the web interface
+
+
+## Search for Metadata (API)
+
+The search API be used to find datasets based on search terms.
+
+```sh
+python fair-api-search.py <search
+```
+
+
 
 
 
