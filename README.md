@@ -111,7 +111,9 @@ export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 Then, to test the API is up and running at all use the script `fair-api-health.py`:
 ```sh
 $ python fair-api-health.py
-
+```
+The output should look something like:
+```
 Testing API endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/health
 API health check succeeded
 ```
@@ -120,7 +122,9 @@ This will fail if the endpoint `/api/health` fails to return a HTTP success code
 To test the token works, run the script `fair-api-datasets-list.py`:
 ```sh
 python fair-api-datasets-list.py
-
+```
+The output should look something like:
+```
 Datasets at endpoint: https://fair.uksouth.preview-mca.aridhia.io//api/datasets
 Found 27 datasets
 ...
