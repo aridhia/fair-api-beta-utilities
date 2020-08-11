@@ -108,6 +108,7 @@ In the examples below, we assume that a valid token is in the user's environment
 export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX9Gncb9YHBOAviRdlVTf0LmFkb9ZM3N-5B-0e4helQ4j99HAlcTqZKbK0iscsvQiYRbnxctYjz242cUb6hKZ_sGL5Suol1YE4NuWF6esOs9iWdM1GsjIYVfNpuw
 export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 ```
+
 Then, to test the API is up and running at all use the script `fair-api-health.py`:
 ```sh
 python fair-api-health.py
