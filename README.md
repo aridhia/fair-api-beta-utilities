@@ -88,13 +88,14 @@ FAIR data services uses the OAuth2 framework for authentication and authorisatio
 
 > This is likely to change soon but for the beta programme, the API uses the same authorisation token as the web user interface, and subject to the same expiry.
 
-1. Via the browser developer tools. Each browser is different (see below). The token is held in **Session Storage**, under the key `msal.idtoken`.  
+**Option 1** Via the browser developer tools. Each browser is different (see below). The token is held in **Session Storage**, under the key `msal.idtoken`.  
 
-To access the devloper tools:
+To access the developer tools:
 
 - On [Firefox](https://developer.mozilla.org/en-US/docs/Tools), you can toggle tools using Control+Shift+I on Windows or Command+Shift+I on macos.
 - On [Chrome](https://developers.google.com/web/tools/chrome-devtools/), you can toggle tools using Command+Option+C (macos) or Control+Shift+C (Windows, Linux, Chrome OS). 
-2. (coming soon!) Via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard.
+
+**Option 2** (coming soon!) Via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard.
 
 The authorisation token is a [JWT](https://jwt.io/) token which is a long encrypted string and will look something like (this example has been redacted):
 ```
