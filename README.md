@@ -154,20 +154,36 @@ python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_datas
 ```
 If successful, the output should look something like:
 ```
-
+API endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/datasets
+Posting definition: examples/simulated_covid19_remdesivir_dataset.json
+Created dataset: simulated_covid19_remdesivir_test (Ref. 296)
+View on the web at: https://fair.uksouth.preview-mca.aridhia.io/#/data/datasets/simulated_covid19_remdesivir_tes
 ```
 > Tip: During the beta testing, it can be useful to create a dataset using the API but delete it either using an HTTP `DELETE` call or using the web interface
-
 
 ## Search for Metadata (API)
 
 The search API be used to find datasets based on search terms.
 
 ```sh
-python fair-api-search.py <search
+python fair-api-search.py <search terms>
+```
+Search terms are concatenated into a single search string.
+
+Examples:
+```sh
+python fair-api-search.py alzheimer\'s
+```
+Will produce results like:
+```
+Search for "alzheimer's" returns 4 results
+2.1436093 - synthetic_alzheimers_profile - Synthetic Alzheimer's Profiles
+1.8868049 - oasis_longitudinal - MRI and Alzheimer's
+0.71022123 - sadd_subjects - Synthetic Alzheimer's Disease Data
+0.4112628 - sadd_snipper - Synthetic Alzheimer's Disease Data
 ```
 
-
+Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
 
 
 
