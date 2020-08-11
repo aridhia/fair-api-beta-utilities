@@ -53,3 +53,4 @@ with open(definition_file) as fh:
             dataset = data[0]
             # TODO - dataset['id'] may be confusing here. Need to review API?
             print(f'Created dataset: {dataset["code"]} (Ref. {dataset["id"]})')
+            print(f'View on the web at: {FAIR_API_ENDPOINT}/#/data/datasets/{dataset["code"]}')
