@@ -110,7 +110,7 @@ export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 ```
 Then, to test the API is up and running at all use the script `fair-api-health.py`:
 ```sh
-$ python fair-api-health.py
+python fair-api-health.py
 ```
 The output should look something like:
 ```
