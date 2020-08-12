@@ -26,6 +26,7 @@ The service supports web-based access and API access. The full API documentation
 - Web access through a modern browser
 - Example of API access are given using `python` and the `requests` library but could be adapted to other tools such as `curl` or an API client like [Postman](https://www.postman.com/)
 - Examples are provided for a Linux environment but could be adapted to Windows environment.
+- Where python is used, we assume Python 3.
 
 ## Create a Dataset Entry (Web)
 
