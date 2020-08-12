@@ -3,8 +3,8 @@
     "id": "simulated_covid19_remdesivir_test",
     "title": "Simulated COVID-19 Remdesivir Study (TEST)",
     "description": "Cohorts simulated from distributions reported originally in a randomised controlled trial of Remdesivir on COVID-19 patients by the ACTT-1 Study Group (doi: 10.1056/NEJMoa2007764). The original distributions in the study cohort are supplemented by variations in fictional cohorts. This dataset was developed in order to support meta-analysis efforts by the COVID-19 Workbench",
-    "creator": "Rodrigo Barnes",
-    "contactPoint": "rodrigo.barnes@aridhia.com",
+    "creator": "Aridhia Example",
+    "contactPoint": "info@aridhia.com",
     "publisher": {
       "name": "Aridhia Informatics",
       "url": "https://www.aridhia.com"
