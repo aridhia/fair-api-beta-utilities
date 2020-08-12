@@ -24,17 +24,18 @@ headers = {
     'Authorization': f'Bearer {FAIR_API_TOKEN}'
 }
 
-search_end_point=f'{FAIR_API_ENDPOINT}/api/search/search'
+search_endpoint=f'{FAIR_API_ENDPOINT}/api/search/search'
 
 params = {
     'index': 'fair-index',
     'query': search_terms   
 }
 
-r = requests.get(search_end_point, headers=headers, params=params)
+r = requests.get(search_endpoint, headers=headers, params=params)
 
 if r.status_code != 200:
-        print(f'Failed to search: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
+     data = r.json()
+     print(f'Failed to search: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
 else:
     results = r.json()
     hits = len(results["items"])
