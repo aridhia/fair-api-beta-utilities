@@ -19,7 +19,7 @@ As a data consumer, finding and querying data:
 - Read and download metadata
 - Query and download data (API only, beta)
 
-The service supports web-based access and API access. The full API documentation including the technical format for the catalogue and dictionary data structures (in JSON) is available in TODO/Knowledge Base.
+The service supports web-based access and API access. The full API documentation including the technical format for the catalogue and dictionary data structures (in JSON) will be available in the next release (by end August 2020). In the meantime please use the examples provided, or create a dataset manually in the Web interface and download the JSON file for the entry.
 
 ## Pre-requisites
 
