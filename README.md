@@ -48,6 +48,8 @@ To create a new data entry
 - You can then upload attachments by dragging and dropping the files in the area at the bottom of the screen
 - Creating and editing the dictionary (TODO)
 
+For more details - see the knowledge base pages on [Managing Data](https://knowledgebase.aridhia.io/kbcategory/managing-data-fair-data-services/)
+
 ## Search for a Dataset Entry (Web)
 
 Using the Web interface, it is possible to find datasets using the search functionality:
@@ -62,6 +64,8 @@ From the search tab, you can:
 - search for words using fuzzy matching: e.g. "alz~"
 
 Click the name of the dataset to view the full entry.
+
+For more details - see the knowledge base page on [Searching for Data](https://knowledgebase.aridhia.io/article/searching-for-data/)
 
 ## View and download dataset metadata (Web)
 
@@ -81,6 +85,7 @@ The page for a dataset displays the metadata record:
 
 In addition, it is possible to download metadata records in JSON by clicking the download icons adjacent to the display of the catalogue entry or and dictionary. Alternatively the JSON entry can be downloaded as a whole using the 'Download' tool in the menu ribbon.
 
+For more details - see the knowledge base page on [What is a dataset](https://knowledgebase.aridhia.io/article/what-is-a-dataset/)
 
 ## Obtaining an API authorisation token
 
@@ -184,9 +189,3 @@ Search for "alzheimer's" returns 4 results
 ```
 
 Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
-
-
-
-
-
-
