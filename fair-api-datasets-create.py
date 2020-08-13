@@ -12,7 +12,7 @@ if 'FAIR_API_ENDPOINT' not in os.environ:
     exit(1)
 
 if len(sys.argv) < 2:
-    print(f'Usage: {sys.argv[0]} <path to dataset defintion json file>')
+    print(f'Usage: {sys.argv[0]} <path to dataset definition json file>')
     exit(1)
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']

@@ -23,10 +23,19 @@ The service supports web-based access and API access. The full API documentation
 
 ## Pre-requisites
 
-- Web access through a modern browser
+In order to run these examples, you need to be a user of an Aridhia [FAIR Data service](https://www.aridhia.com/fair-data-services/) instance with the following permissions:
+
+- Data steward permissions set
+- In addition, `datasets upload` and `selection read` permissions are required
+
+Please note the following assumptions:
+
+- Web access is through a modern browser (Chrome or Firefox)
 - Example of API access are given using `python` and the `requests` library but could be adapted to other tools such as `curl` or an API client like [Postman](https://www.postman.com/)
 - Examples are provided for a Linux environment but could be adapted to Windows environment.
 - Where python is used, we assume Python 3.
+- Uploading data and attachments requires the [`tusclient` library](https://github.com/tus/tus-py-client). This can be installed using `pip` or other tools. Ensure you have the right version for Python 3.
+
 
 ## Create a Dataset Entry (Web)
 
@@ -99,7 +108,7 @@ FAIR data services uses the OAuth2 framework for authentication and authorisatio
 To access the developer tools:
 
 - On [Firefox](https://developer.mozilla.org/en-US/docs/Tools), you can toggle tools using Control+Shift+I on Windows or Command+Shift+I on macos.
-- On [Chrome](https://developers.google.com/web/tools/chrome-devtools/), you can toggle tools using Command+Option+C (macos) or Control+Shift+C (Windows, Linux, Chrome OS). 
+- On [Chrome](https://developers.google.com/web/tools/chrome-devtools/), you can toggle tools using Command+Option+C (macos) or Control+Shift+C (Windows, Linux, Chrome OS). Look for "Session Storage" in the "Application" tab. 
 
 **Option 2** (coming soon!) Via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard.
 
@@ -190,3 +199,41 @@ Search for "alzheimer's" returns 4 results
 ```
 
 Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
+
+## Upload attachments (beta API)
+
+> This is an **early access** API and subject to change. Please send feedback so we can improved the experience. 
+
+It is possible to add an attachment to the dataset, so that it can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
+
+To upload an attachment, it is important to know the dataset code. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with the `attachments` switch:
+```sh
+python fair-api-upload.py simulated_covid19_remdesivir attachments examples/Covid-19-curves-graphic-social-v3-1.gif
+```
+
+Note the parameter is `attachments` not `attachment`.
+
+The image used in this example is “Flattening the curve” by Siouxsie Wiles and Toby Morris licensed CC BY-SA. see [website](https://creativecommons.org/2020/03/19/now-is-the-time-for-open-access-policies-heres-why/covid-19-curves-graphic-social-v3-1/). Thanks!
+
+## Upload data (beta API)
+
+> This is an **early access** API and subject to change. Please send feedback so we can improved the experience. 
+
+The FAIR data services can store structured data for subsequent selection and query. CSV files can be selected if their names match a dictionary name. (Remember that a FAIR dataset can have multiple tables.) In the simplest example, the dataset code, CSV file and dictionary name are all the same e.g. `simulated_covid19_remdesivir`. 
+
+To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
+```sh
+python fair-api-upload.py simulated_covid19_remdesivir data examples/simulated_covid19_remdesivir.csv
+``` 
+
+Uploading a CSV will result in a database table being created and written to. The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
+
+
+
+
+
+
+
+
+
+
