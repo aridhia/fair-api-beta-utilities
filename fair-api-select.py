@@ -25,16 +25,6 @@ if not os.path.isfile(graphql_file):
 
 with open(graphql_file) as fh:
     graphql = fh.read().strip()
-    #raphql = """{
-    #'    simulated_covid19_remdesivir {
-    #        simulated_covid19_remdesivir {
-    #            study_name
-    #            age
-    #             comorbidity
-    #        }
-    #    }
-    #}"""
-    
     print(graphql)
 
     payload = {
