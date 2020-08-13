@@ -24,16 +24,16 @@ if not os.path.isfile(graphql_file):
     exit(1) 
 
 with open(graphql_file) as fh:
-    # graphql = fh.read().strip()
-    graphql = """{
-        simulated_covid19_remdesivir {
-            simulated_covid19_remdesivir {
-                study_name
-                age
-                comorbidity
-            }
-        }
-    }"""
+    graphql = fh.read().strip()
+    #raphql = """{
+    #'    simulated_covid19_remdesivir {
+    #        simulated_covid19_remdesivir {
+    #            study_name
+    #            age
+    #             comorbidity
+    #        }
+    #    }
+    #}"""
     
     print(graphql)
 
@@ -47,6 +47,6 @@ with open(graphql_file) as fh:
 
     r = requests.post(f'{FAIR_API_ENDPOINT}/api/selection/select', headers=headers, json=payload)
     if r.status_code != 200:
-        print(f'Failed to search: ({r.status_code}) {r.content}') 
+        print(f'Failed to select: ({r.status_code}) {r.content}') 
     else:
         print(r.json())

@@ -32,10 +32,10 @@ Please note the following assumptions:
 
 - Web access is through a modern browser (Chrome or Firefox)
 - Example of API access are given using `python` and the `requests` library but could be adapted to other tools such as `curl` or an API client like [Postman](https://www.postman.com/)
+- [`jq`](https://stedolan.github.io/jq/) is a useful tool for processing JSON outputs.
 - Examples are provided for a Linux environment but could be adapted to Windows environment.
 - Where python is used, we assume Python 3.
 - Uploading data and attachments requires the [`tusclient` library](https://github.com/tus/tus-py-client). This can be installed using `pip` or other tools. Ensure you have the right version for Python 3.
-
 
 ## Create a Dataset Entry (Web)
 
@@ -234,12 +234,23 @@ python fair-api-upload.py\
 
 Uploading a CSV will result in a database table being created and written to. The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
 
+## Selecting data (beta API)
 
+> This is an **early access** API and subject to change. Please send feedback so we can improved the experience. 
 
+When data has been uploaded, it can be queried or downloaded using [GraphQL](https://graphql.org/) queries. Specifying GraphQL is outside the scope of this documentation but a number of examples are provided.
 
+The API allows queries to be validated (is the query formatted correctly) as well as checking whether the query would return results if executed (aka 'beacon') as well as selecting. The dialect of GraphQL used allows for filtering and aggregation. Examples are provided of each. The example script just shows the `/api/selection/select` endpoint, but could be adapted for the `/api/selection/validate` and `/api/selection/beacon` endpoints.
 
+To run the example use the script [fair-api-select.py](fair-api-select.py) with a query file:
+```sh
+python fair-api-select.py examples/select-all.graphql
+```
 
+Examples:
 
+- [selection](./examples/select-all.sql)
+- [filter](./examples/filter.sql)
+- [aggregate](./examples/aggregate.sql)
 
-
-
+Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
