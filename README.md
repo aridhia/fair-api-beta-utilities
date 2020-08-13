@@ -254,3 +254,9 @@ Examples:
 - [aggregate](./examples/aggregate.sql)
 
 Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
+
+## License
+
+Please contact Aridhia Informatics to license this code. 
+
+Copyright - All rights reserved (c) 2020 Aridhia Informatics.
