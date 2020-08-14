@@ -34,8 +34,17 @@ with open(graphql_file) as fh:
         'Content-type': 'application/json'
     }
 
-    r = requests.post(f'{FAIR_API_ENDPOINT}/api/selection/select', headers=headers, json=payload)
+    selection_endpoint = f'{FAIR_API_ENDPOINT}/api/selection/select'
+
+    r = requests.post(selection_endpoint, headers=headers, json=payload)
     if r.status_code != 200:
-        print(f'Failed to select: ({r.status_code}) {r.content}') 
+        error = {
+            'endpoint': selection_endpoint,
+            'graphql_file': graphql_file,
+            'error': f'Selection failed',
+            'message':  str(r.content),
+            'status_code': r.status_code
+        }
+        print(json.dumps(error))
     else:
         print(r.json())
