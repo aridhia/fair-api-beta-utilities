@@ -249,9 +249,9 @@ python fair-api-select.py examples/select-all.graphql
 
 Examples:
 
-- [selection](./examples/select-all.sql)
-- [filter](./examples/filter.sql)
-- [aggregate](./examples/aggregate.sql)
+- [selection](./examples/select-all.graphql)
+- [filter](./examples/filter.graphql)
+- [aggregate](./examples/aggregate.graphql)
 
 Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
 
@@ -260,3 +260,5 @@ Outputs are in JSON format, but can be easily converted to CSV if needed using a
 Please contact Aridhia Informatics to license this code. 
 
 Copyright - All rights reserved (c) 2020 Aridhia Informatics.
+
+
