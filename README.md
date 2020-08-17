@@ -255,6 +255,35 @@ Examples:
 
 Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
 
+## Conversting JSON output to CSV
+
+JSON data can be converted to CSV with a tool like `jq`. For example, to select data and then convert it to CSV with headers, the following script will first select data to a file, then convert it to the target format:
+
+```sh
+python fair-api-select.py examples/select-all.graphql  > output/select-all.json
+
+cat output/select-all.json\
+    | jq -r '["study_name", "age", "comorbidity"], (.data[].simulated_covid19_remdesivir[] | [.study_name,.age,.comorbidity]) | @csv'\
+    | less
+```
+
+Note that the `jq` pattern creates a row with the headers, then parses the array of nested values in the result JSON into a flat array of values, then formats it for CSV output with the `@csv` macro.
+
+Results from selection are in the form:
+
+```js
+{
+    "data": [
+        {
+            "tablename": [
+                { ... record ... }
+            ]
+        }
+    ]
+}
+```
+The example above use the pattern `.data[].tablename[]` (in this case `.data[].simulated_covid19_remdesivir[]`) to extract the records into a list.
+
 ## License
 
 Please contact Aridhia Informatics to license this code. 
