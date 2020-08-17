@@ -2,6 +2,8 @@
 
 Useful scripts and documentation for using the beta version of the API for [FAIR Data Services](https://www.aridhia.com/fair-data-services/). The API to the service is currently in beta. For more user guide material on the FAIR data services, please refer to the [knowledge base](https://knowledgebase.aridhia.io/kbcategory/fair-data-services/)
 
+See also the [API specification](http://fair-api.uksouth.cloudapp.azure.com/) (Temporary address; will change at next release).
+
 > Note: This repository provides **early access** functionality which may change over time. Feedback is welcome: Please log an issue in this github repository.
 
 ## Overview - interacting with the metadata service
@@ -56,7 +58,7 @@ To create a new data entry
 - Provide a code (optional), name and brief description for the dataset. Click `Create`
 - Provide further details by completing the using `Click to Edit`.
 - You can then upload attachments by dragging and dropping the files in the area at the bottom of the screen
-- Creating and editing the dictionary (TODO)
+- Creating and editing the dictionary (Not supported yet)
 
 For more details - see the knowledge base pages on [Managing Data](https://knowledgebase.aridhia.io/kbcategory/managing-data-fair-data-services/)
 
