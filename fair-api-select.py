@@ -47,4 +47,4 @@ with open(graphql_file) as fh:
         }
         print(json.dumps(error))
     else:
-        print(r.json())
+        print(json.dumps(r.json()))
