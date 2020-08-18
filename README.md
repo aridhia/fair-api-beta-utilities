@@ -238,7 +238,7 @@ The image used in this example is “Flattening the curve” by Siouxsie Wiles a
 
 The FAIR data services can store structured data for subsequent selection and query. CSV files can be selected if their names match a dictionary name. (Remember that a FAIR dataset can have multiple tables.)  
 
-Rename the example CSV file with the `dataset` > `id` that has been set in the JSON file. 
+Rename the example CSV file with the `dictionary` > `id` that has been set in the JSON file. 
 
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
 ```sh
