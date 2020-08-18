@@ -124,7 +124,7 @@ When copying the token, make sure the whole token is copied, with no spaces. If 
 In the examples below, we assume that a valid token is in the user's environment, as well an API endpoint. For example in a bash terminal, set the environment property:
 ```sh
 export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX9Gncb9YHBOAviRdlVTf0LmFkb9ZM3N-5B-0e4helQ4j99HAlcTqZKbK0iscsvQiYRbnxctYjz242cUb6hKZ_sGL5Suol1YE4NuWF6esOs9iWdM1GsjIYVfNpuw
-export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
+export FAIR_API_ENDPOINT=https://fair.addi.ad-datainitiative.org
 ```
 
 > Note your `FAIR_API_ENDPOINT` will vary - make sure it's pointing to the correct server for your use case.
@@ -137,7 +137,7 @@ python fair-api-health.py
 ```
 The output should look something like:
 ```
-Testing API endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/health
+Testing API endpoint: https://fair.addi.ad-datainitiative.org/api/health
 API health check succeeded
 ```
 This will fail if the endpoint `/api/health` fails to return a HTTP success code of 200.
@@ -148,7 +148,7 @@ python fair-api-datasets-list.py
 ```
 The output should look something like:
 ```
-Datasets at endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/datasets
+Datasets at endpoint: https://fair.addi.ad-datainitiative.org/api/datasets
 Found 27 datasets
 ...
 avocado_prices - Avocado Prices
@@ -166,17 +166,27 @@ Datasets are created using HTTP `POST` operations. The server validates the payl
 
 Technically the `POST` call can create multiple datasets, but the python script assumes that only one is created.
 
-For example, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json) - see [`fair-api-datasets-create.py`](fair-api-datasets-create.py).
+An example dataset JSON file has been provided, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json), however the following attributes should be modified to something unique.
+
+* `catalogue` > `id` 
+* `catalogue` > `name` 
+* `dictionary` > `id`
+
+For the purpose of these examples, we will assume that **<catalogue_id>** will be the `catalogue` > `id` which you have just set in the JSON file.
+
+We will also assume that **<dictionary_id>** will be the `dictionary` > `id` which you have also just set in the JSON file.
+
+When you call the URL's in the examples you should replace **<catalogue_id>** and **<dictionary_id>** with what has been set in the JSON file.
 
 ```sh
 python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_dataset.json
 ```
 If successful, the output should look something like:
 ```
-API endpoint: https://fair.uksouth.preview-mca.aridhia.io/api/datasets
+API endpoint: https://fair.addi.ad-datainitiative.org/api/datasets
 Posting definition: examples/simulated_covid19_remdesivir_dataset.json
 Created dataset: simulated_covid19_remdesivir_test (Ref. 296)
-View on the web at: https://fair.uksouth.preview-mca.aridhia.io/#/data/datasets/simulated_covid19_remdesivir_tes
+View on the web at: https://fair.addi.ad-datainitiative.org/#/data/datasets/simulated_covid19_remdesivir_tes
 ```
 > Tip: During the beta testing, it can be useful to create a dataset using the API but delete it either using an HTTP `DELETE` call or using the web interface
 
@@ -213,7 +223,7 @@ It is possible to add an attachment to the dataset, so that it can be downloaded
 To upload an attachment, it is important to know the dataset code. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with the `attachments` switch:
 ```sh
 python fair-api-upload.py\
-     simulated_covid19_remdesivir\
+     <dictionary_id>\
      attachments\
      examples/Covid-19-curves-graphic-social-v3-1.gif
 ```
@@ -226,14 +236,16 @@ The image used in this example is “Flattening the curve” by Siouxsie Wiles a
 
 > This is an **early access** API and subject to change. Please send feedback so we can improved the experience. 
 
-The FAIR data services can store structured data for subsequent selection and query. CSV files can be selected if their names match a dictionary name. (Remember that a FAIR dataset can have multiple tables.) In the simplest example, the dataset code, CSV file and dictionary name are all the same e.g. `simulated_covid19_remdesivir`. 
+The FAIR data services can store structured data for subsequent selection and query. CSV files can be selected if their names match a dictionary name. (Remember that a FAIR dataset can have multiple tables.)  
+
+Rename the example CSV file with the `dataset` > `id` that has been set in the JSON file. 
 
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
 ```sh
 python fair-api-upload.py\
-    simulated_covid19_remdesivir\
+    <dictionary_id>\
     data\
-    examples/simulated_covid19_remdesivir.csv
+    examples/<dictionary_id>.csv
 ``` 
 
 Uploading a CSV will result in a database table being created and written to. The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
