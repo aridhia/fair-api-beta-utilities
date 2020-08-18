@@ -223,7 +223,7 @@ It is possible to add an attachment to the dataset, so that it can be downloaded
 To upload an attachment, it is important to know the dataset code. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with the `attachments` switch:
 ```sh
 python fair-api-upload.py\
-     <dictionary_id>\
+     <catalogue_id>\
      attachments\
      examples/Covid-19-curves-graphic-social-v3-1.gif
 ```
@@ -243,12 +243,12 @@ Rename the example CSV file with the `dictionary` > `id` that has been set in th
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
 ```sh
 python fair-api-upload.py\
-    <dictionary_id>\
+    <catalogue_id>\
     data\
     examples/<dictionary_id>.csv
 ``` 
 
-Uploading a CSV will result in a database table being created and written to. The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
+Uploading a CSV will result in a database table being created and written to within the dataset previously created (i.e. named `catalogue` > `id`). The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
 
 ## Selecting data (beta API)
 
