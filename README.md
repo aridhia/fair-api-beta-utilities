@@ -127,6 +127,8 @@ export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX
 export FAIR_API_ENDPOINT=https://fair.uksouth.preview-mca.aridhia.io
 ```
 
+> Note your `FAIR_API_ENDPOINT` will vary - make sure it's pointing to the correct server for your use case.
+
 ## Testing the API
 
 Then, to test the API is up and running at all use the script [`fair-api-health.py`](fair-api-health.py):
