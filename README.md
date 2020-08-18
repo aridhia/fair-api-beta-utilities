@@ -162,15 +162,17 @@ Datasets are created using HTTP `POST` operations. The server validates the payl
 
 Technically the `POST` call can create multiple datasets, but the python script assumes that only one is created.
 
-For example, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json) - see [`fair-api-datasets-create.py`](fair-api-datasets-create.py).
+An example dataset JSON file has been provided, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json), however the following attributes should be modified to something unique.
 
-To use this example file an edit has to be made in [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json) to populate the `catalogue` > `id` and `dataset` > `id` entries.
+* `catalogue` > `id` 
+* `catalogue` > `name` 
+* `dictionary` > `id`
 
 For the purpose of these examples, we will assume that **<catalogue_id>** will be the `catalogue` > `id` which you have just set in the JSON file.
 
-We will also assume that **<dataset_id>** will be the `dataset` > `id` which you have also just set in the JSON file.
+We will also assume that **<dictionary_id>** will be the `dictionary` > `id` which you have also just set in the JSON file.
 
-When you call the URL's in the examples you should replace **<catalogue_id>** and **<dataset_id>** with what has been set in the JSON file.
+When you call the URL's in the examples you should replace **<catalogue_id>** and **<dictionary_id>** with what has been set in the JSON file.
 
 ```sh
 python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_dataset.json
@@ -217,7 +219,7 @@ It is possible to add an attachment to the dataset, so that it can be downloaded
 To upload an attachment, it is important to know the dataset code. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with the `attachments` switch:
 ```sh
 python fair-api-upload.py\
-     <dataset_id>\
+     <dictionary_id>\
      attachments\
      examples/Covid-19-curves-graphic-social-v3-1.gif
 ```
@@ -237,9 +239,9 @@ Rename the example CSV file with the `dataset` > `id` that has been set in the J
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
 ```sh
 python fair-api-upload.py\
-    <dataset_id>\
+    <dictionary_id>\
     data\
-    examples/<dataset_id>.csv
+    examples/<dictionary_id>.csv
 ``` 
 
 Uploading a CSV will result in a database table being created and written to. The system will attempt to load the CSV into the PostgreSQL database but may fail due to formatting errors. Also, please note that if a CSV is uploaded multiple times it will **overwrite** the original database table. (In future, appending may be supported - let us know if this is important).
