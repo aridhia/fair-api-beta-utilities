@@ -2,7 +2,7 @@
 
 Useful scripts and documentation for using the beta version of the API for [FAIR Data Services](https://www.aridhia.com/fair-data-services/). The API to the service is currently in beta. For more user guide material on the FAIR data services, please refer to the [knowledge base](https://knowledgebase.aridhia.io/kbcategory/fair-data-services/)
 
-See also the [API specification](http://fair-api.uksouth.cloudapp.azure.com/) (Temporary address; will change at next release).
+See also the [API specification](https://fair.uksouth.preview-mca.aridhia.io/api/docs).
 
 > Note: This repository provides **early access** functionality which may change over time. Feedback is welcome: Please log an issue in this github repository.
 
@@ -103,22 +103,12 @@ For more details - see the knowledge base page on [What is a dataset](https://kn
 
 FAIR data services uses the OAuth2 framework for authentication and authorisation. All API calls require an API authorisation token, obtained as an authenticated user of the FAIR data service.
 
-> This is likely to change soon but for the beta programme, the API uses the same authorisation token as the web user interface, and subject to the same expiry.
-
-**Option 1** Via the browser developer tools. Each browser is different (see below). The token is held in **Session Storage**, under the key `msal.idtoken`.  
-
-To access the developer tools:
-
-- On [Firefox](https://developer.mozilla.org/en-US/docs/Tools), you can toggle tools using Control+Shift+I on Windows or Command+Shift+I on macos.
-- On [Chrome](https://developers.google.com/web/tools/chrome-devtools/), you can toggle tools using Command+Option+C (macos) or Control+Shift+C (Windows, Linux, Chrome OS). Look for "Session Storage" in the "Application" tab. 
-
-**Option 2** (coming soon!) Via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard.
+A temporary API token can be obtained via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard using the button provided.
 
 The authorisation token is a [JWT](https://jwt.io/) token which is a long encrypted string and will look something like (this example has been redacted):
 ```
 eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX9Gncb9YHBOAviRdlVTf0LmFkb9ZM3N-5B-0e4helQ4j99HAlcTqZKbK0iscsvQiYRbnxctYjz242cUb6hKZ_sGL5Suol1YE4NuWF6esOs9iWdM1GsjIYVfNpuw
 ```
-
 When copying the token, make sure the whole token is copied, with no spaces. If you have a problem with the token, refresh the web browser and try again.
 
 In the examples below, we assume that a valid token is in the user's environment, as well an API endpoint. For example in a bash terminal, set the environment property:
