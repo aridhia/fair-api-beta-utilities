@@ -118,10 +118,15 @@ When copying the token, make sure the whole token is copied, with no spaces. If 
 In the examples below, we assume that a valid token is in the user's environment, as well an API endpoint. For example in a bash terminal, set the environment property:
 ```sh
 export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX9Gncb9YHBOAviRdlVTf0LmFkb9ZM3N-5B-0e4helQ4j99HAlcTqZKbK0iscsvQiYRbnxctYjz242cUb6hKZ_sGL5Suol1YE4NuWF6esOs9iWdM1GsjIYVfNpuw
-export FAIR_API_ENDPOINT=https://fair.addi.ad-datainitiative.org
 ```
+## The FAIR API endpoint
 
 > Note your `FAIR_API_ENDPOINT` will vary - make sure it's pointing to the correct server for your use case.
+
+Depending on the instance of the FAIR data service you are working with, you will be provided with a URL to the service, which acts as base URL of the API endpoint. This will be the bare URL without paths. For example, for the 'preview' FAIR data service instance, the URL is `https://fair.uksouth.preview-mca.aridhia.io' - without a trailing `/`. You will probably be given a different URL, which should be set in the environment:
+```
+export FAIR_API_ENDPOINT=<as provided>
+```
 
 ## Testing the API
 
