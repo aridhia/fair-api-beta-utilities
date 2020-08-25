@@ -123,7 +123,7 @@ export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX
 
 > Note your `FAIR_API_ENDPOINT` will vary - make sure it's pointing to the correct server for your use case.
 
-Depending on the instance of the FAIR data service you are working with, you will be provided with a URL to the service, which acts as base URL of the API endpoint. This will be the bare URL without paths. For example, for the 'preview' FAIR data service instance, the URL is `https://fair.uksouth.preview-mca.aridhia.io' - without a trailing `/`. You will probably be given a different URL, which should be set in the environment:
+Depending on the instance of the FAIR data service you are working with, you will be provided with a URL to the service, which acts as base URL of the API endpoint. This will be the bare URL without paths. For example, for the 'preview' FAIR data service instance, the URL is `https://fair.uksouth.preview-mca.aridhia.io` - without a trailing `/`. You will probably be given a different URL, which should be set in the environment:
 ```
 export FAIR_API_ENDPOINT=<as provided>
 ```
