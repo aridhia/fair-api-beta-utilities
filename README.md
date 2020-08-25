@@ -2,7 +2,7 @@
 
 Useful scripts and documentation for using the beta version of the API for [FAIR Data Services](https://www.aridhia.com/fair-data-services/). The API to the service is currently in beta. For more user guide material on the FAIR data services, please refer to the [knowledge base](https://knowledgebase.aridhia.io/kbcategory/fair-data-services/)
 
-See also the [API specification](https://fair.uksouth.preview-mca.aridhia.io/api/docs).
+See also the [API specification](https://fair.uksouth.preview-mca.aridhia.io/api/docs/).
 
 > Note: This repository provides **early access** functionality which may change over time. Feedback is welcome: Please log an issue in this github repository.
 
