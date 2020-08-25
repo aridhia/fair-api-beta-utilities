@@ -103,7 +103,11 @@ For more details - see the knowledge base page on [What is a dataset](https://kn
 
 FAIR data services uses the OAuth2 framework for authentication and authorisation. All API calls require an API authorisation token, obtained as an authenticated user of the FAIR data service.
 
-A temporary API token can be obtained via the FAIR web interface: Click the drop down menu top-right of the screen with your name on it, select the "About" option. The token will be displayed in the pop up dialogue. Copy the key to clipboard using the button provided.
+A temporary API token can be obtained via the FAIR web interface: 
+
+- Click the drop down menu top-right of the screen with your name on it, select the "About" option. 
+- The token will be displayed in the pop up dialogue. 
+- Copy the key to clipboard using the button provided.
 
 The authorisation token is a [JWT](https://jwt.io/) token which is a long encrypted string and will look something like (this example has been redacted):
 ```
