@@ -16,6 +16,8 @@ In summary, a dataset entry in the FAIR datas services is defined as:
 - Dictionary (1 x data table)
 - Data table(s) if present
 
+More information regarding the definition of a FAIR dataset can be found [here](https://knowledgebase.aridhia.io/article/what-is-a-dataset/).
+
 As a data owner, depositing data and metadata:
 
 - Create a dataset entry - dataset-level (catalogue) and table-level (dictionary) metadata
