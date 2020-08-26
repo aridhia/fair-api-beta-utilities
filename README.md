@@ -10,7 +10,7 @@ See also the [API specification](https://fair.uksouth.preview-mca.aridhia.io/api
 
 The FAIR data services support the life cycle of creating and using metadata about research datasets. This service manages metadata and data for a dataset. Normally, a dataset comprises one or more tables of data. In some cases, for example when setting a standard for data, the dataset doesn't have data tables associated with it, just metadata:
 
-In summary, a dataset entry in the FAIR datas services is defined as:
+In summary, a dataset entry in the FAIR Data Services is defined as:
 
 - Catalogue (1 x dataset)
 - Dictionary (1 x data table)
@@ -18,18 +18,23 @@ In summary, a dataset entry in the FAIR datas services is defined as:
 
 More information regarding the definition of a FAIR dataset can be found [here](https://knowledgebase.aridhia.io/article/what-is-a-dataset/).
 
-As a data owner, depositing data and metadata:
+As a Data Steward/Owner, you can deposit data and metadata. Specifically:
 
 - Create a dataset entry - dataset-level (catalogue) and table-level (dictionary) metadata
 - Upload data (API only, beta) 
+- Assume the permissions of a Standard user (i.e. data consumer)
 
-As a data consumer, finding and querying data:
+As a Standard user (or data consumer), you can find and query data:
 
 - Search for metadata
+- Save searches
 - Read and download metadata
 - Query and download data (API only, beta)
 
-The service supports web-based access and API access. The full API documentation including the technical format for the catalogue and dictionary data structures (in JSON) will be available in the next release (by end August 2020). In the meantime please use the examples provided, or create a dataset manually in the Web interface and download the JSON file for the entry.
+More information regarding the user permissions in FAIR Data Services can be found [here](https://knowledgebase.aridhia.io/article/role-based-access-control-2/).
+
+The service supports web-based access and API access where the full API documentation can be found [here](https://fair.uksouth.preview-mca.aridhia.io/api/docs/).
+that includes the technical format for the catalogue and dictionary data structures (in JSON). However you can also use the examples provided that allow dataset searching, creation and uploading of data.
 
 ## Pre-requisites
 
