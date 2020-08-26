@@ -95,7 +95,7 @@ The page for a dataset displays the metadata record:
 - Attachments - such as documentation or supplementary material which can be downloaded
 - Dictionary by table
 
-In addition, it is possible to download metadata records in JSON by clicking the download icons adjacent to the display of the catalogue entry or and dictionary. Alternatively the JSON entry can be downloaded as a whole using the 'Download' tool in the menu ribbon.
+In addition, it is possible to download metadata records in JSON by clicking the download icons adjacent to the display of the catalogue entry and dictionary. Alternatively the JSON entry can be downloaded as a whole using the 'Download' tool in the menu ribbon.
 
 For more details - see the knowledge base page on [What is a dataset](https://knowledgebase.aridhia.io/article/what-is-a-dataset/)
 
@@ -270,7 +270,7 @@ Examples:
 
 Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
 
-## Conversting JSON output to CSV
+## Converting JSON output to CSV
 
 JSON data can be converted to CSV with a tool like `jq`. For example, to select data and then convert it to CSV with headers, the following script will first select data to a file, then convert it to the target format:
 
