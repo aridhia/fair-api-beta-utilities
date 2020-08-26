@@ -129,7 +129,7 @@ export FAIR_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZ...iFYQ84MQt0euCX
 
 > Note your `FAIR_API_ENDPOINT` will vary - make sure it's pointing to the correct server for your use case.
 
-Depending on the instance of the FAIR data service you are working with, you will be provided with a URL to the service, which acts as base URL of the API endpoint. This will be the bare URL without paths. For example, for the 'preview' FAIR data service instance, the URL is `https://fair.uksouth.preview-mca.aridhia.io` - without a trailing `/`. You will probably be given a different URL, which should be set in the environment:
+Depending on the instance of the FAIR data service you are working with, you will be provided with a URL to the service, which acts as base URL of the API endpoint. This will be the bare URL without paths. In these examples, we use the fictional endpoint `https://fair.example.org`, without a trailing `/`. You will probably be given a different URL, which should be set in the environment:
 ```
 export FAIR_API_ENDPOINT=<as provided>
 ```
@@ -142,7 +142,7 @@ python fair-api-health.py
 ```
 The output should look something like:
 ```
-Testing API endpoint: https://fair.addi.ad-datainitiative.org/api/health
+Testing API endpoint: https://fair.example.org/api/health
 API health check succeeded
 ```
 This will fail if the endpoint `/api/health` fails to return a HTTP success code of 200.
@@ -153,7 +153,7 @@ python fair-api-datasets-list.py
 ```
 The output should look something like:
 ```
-Datasets at endpoint: https://fair.addi.ad-datainitiative.org/api/datasets
+Datasets at endpoint: https://fair.example.org/api/datasets
 Found 27 datasets
 ...
 avocado_prices - Avocado Prices
@@ -188,10 +188,10 @@ python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_datas
 ```
 If successful, the output should look something like:
 ```
-API endpoint: https://fair.addi.ad-datainitiative.org/api/datasets
+API endpoint: https://fair.example.org/api/datasets
 Posting definition: examples/simulated_covid19_remdesivir_dataset.json
 Created dataset: simulated_covid19_remdesivir_test (Ref. 296)
-View on the web at: https://fair.addi.ad-datainitiative.org/#/data/datasets/simulated_covid19_remdesivir_tes
+View on the web at: https://fair.example.org/#/data/datasets/simulated_covid19_remdesivir_tes
 ```
 > Tip: During the beta testing, it can be useful to create a dataset using the API but delete it either using an HTTP `DELETE` call or using the web interface
 
