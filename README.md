@@ -264,7 +264,7 @@ Uploading a CSV will result in a database table being created and written to wit
 
 ## Selecting data (beta API)
 
-> This is an **early access** API and subject to change. Please send feedback so we can improved the experience. 
+> This is an **early access** API, is only available to selected users and is subject to change. For those with access, please send feedback so we can improved the experience. 
 
 When data has been uploaded, it can be queried or downloaded using [GraphQL](https://graphql.org/) queries. Specifying GraphQL is outside the scope of this documentation but a number of examples are provided.
 
