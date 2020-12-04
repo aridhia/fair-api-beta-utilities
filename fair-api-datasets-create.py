@@ -34,23 +34,18 @@ headers = {
 }
 
 with open(definition_file) as fh:
-    payload = {
-        "datasets": [
-            json.load(fh)
-        ]
-    }
-        
-    r = requests.post(dataset_list_endpoint, headers=headers, json=payload)
+    payload=fh.read()
+            
+    r = requests.post(dataset_list_endpoint, headers=headers, json=json.loads(payload))
     if r.status_code != 201:
         data = r.json()
         print(f'Failed to create dataset: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
     else:
         data = r.json()
+  
         if len(data) != 1:
-            print(f'Expected 1 dataset in response - received {ken(data)}')
-            print(json.dumps(data))
+            print(f'Created dataset: {data["code"]}')
+            print(f'View on the web at: {FAIR_API_ENDPOINT}/#/data/datasets/{data["code"]}')
         else:
-            dataset = data[0]
-            # TODO - dataset['id'] may be confusing here. Need to review API?
-            print(f'Created dataset: {dataset["code"]} (Ref. {dataset["id"]})')
-            print(f'View on the web at: {FAIR_API_ENDPOINT}/#/data/datasets/{dataset["code"]}')
+            print(f'Expected 1 dataset in response - received {(data)}')
+           
