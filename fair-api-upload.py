@@ -19,6 +19,10 @@ if len(sys.argv) < 4:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
 
 dataset_code=sys.argv[1]
 upload_type=sys.argv[2]
@@ -44,9 +48,9 @@ metadata = {
 }
 
 if upload_type == 'attachments':
-    url = f'{FAIR_API_ENDPOINT}/api/files/datasets/{dataset_code}/attachments'
+    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{dataset_code}/attachments'
 elif upload_type == 'data':
-    url = f'{FAIR_API_ENDPOINT}/api/files/datasets/{dataset_code}/data'
+    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{dataset_code}/data'
 
 print(f'Dataset code: {dataset_code}')
 print(f'File: {file_to_upload}')

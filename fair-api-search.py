@@ -17,6 +17,10 @@ if len(sys.argv) < 2:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
 
 search_terms=" ".join(sys.argv[1:])
 
@@ -24,7 +28,7 @@ headers = {
     'Authorization': f'Bearer {FAIR_API_TOKEN}'
 }
 
-search_endpoint=f'{FAIR_API_ENDPOINT}/api/search/search'
+search_endpoint=f'{https}{FAIR_API_ENDPOINT}search/search'
 
 params = {
     'index': 'fair-index',
