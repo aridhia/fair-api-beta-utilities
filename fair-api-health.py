@@ -11,8 +11,12 @@ if 'FAIR_API_ENDPOINT' not in os.environ:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
 
-health_endpoint = f'{FAIR_API_ENDPOINT}/api/health'
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
+
+health_endpoint = f'{https}{FAIR_API_ENDPOINT}health'
 print(f'Testing API endpoint: {health_endpoint}')
 
 r = requests.get(health_endpoint)

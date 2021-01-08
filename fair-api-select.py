@@ -17,6 +17,10 @@ if len(sys.argv) < 2:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
 
 graphql_file = sys.argv[1]
 if not os.path.isfile(graphql_file):
@@ -34,7 +38,7 @@ with open(graphql_file) as fh:
         'Content-type': 'application/json'
     }
 
-    selection_endpoint = f'{FAIR_API_ENDPOINT}/api/selection/select'
+    selection_endpoint = f'{https}{FAIR_API_ENDPOINT}selection/select'
 
     r = requests.post(selection_endpoint, headers=headers, json=payload)
     if r.status_code != 200:

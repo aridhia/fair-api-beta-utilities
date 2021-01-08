@@ -12,12 +12,16 @@ if 'FAIR_API_ENDPOINT' not in os.environ:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
 
 headers = {
     'Authorization': f'Bearer {FAIR_API_TOKEN}'
 }
 
-dataset_list_endpoint = f'{FAIR_API_ENDPOINT}/api/datasets'
+dataset_list_endpoint = f'{https}{FAIR_API_ENDPOINT}datasets'
 r = requests.get(dataset_list_endpoint, headers=headers)
 if r.status_code != 200:
     error_data = r.json()

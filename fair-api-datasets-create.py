@@ -17,13 +17,18 @@ if len(sys.argv) < 2:
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
 FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
 
 definition_file = sys.argv[1]
 if not os.path.isfile(definition_file):
     print(f'Definition file not valid: {definition_file}')
     exit(1)
 
-dataset_list_endpoint = f'{FAIR_API_ENDPOINT}/api/datasets'
+dataset_list_endpoint = f'{https}{FAIR_API_ENDPOINT}datasets'
+FAIR_URL = f'{https}{FAIR_API_ENDPOINT}'[:-4]
 
 print(f'API endpoint: {dataset_list_endpoint}')
 print(f'Posting definition: {definition_file}')
@@ -32,6 +37,8 @@ headers = {
     'Authorization': f'Bearer {FAIR_API_TOKEN}',
     'Content-Type' : 'application/json'
 }
+
+
 
 with open(definition_file) as fh:
     payload=fh.read()
@@ -45,7 +52,7 @@ with open(definition_file) as fh:
   
         if len(data) != 1:
             print(f'Created dataset: {data["code"]}')
-            print(f'View on the web at: {FAIR_API_ENDPOINT}/#/data/datasets/{data["code"]}')
+            print(f'View on the web at: {FAIR_URL}#/data/datasets/{data["code"]}')
         else:
             print(f'Expected 1 dataset in response - received {(data)}')
            
