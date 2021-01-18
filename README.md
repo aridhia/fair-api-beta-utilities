@@ -318,6 +318,12 @@ Results from selection are in the form:
 ```
 The example above use the pattern `.data[].tablename[]` (in this case `.data[].simulated_covid19_remdesivir[]`) to extract the records into a list.
 
+## Deleting the Dataset
+
+To delete your test dataset, use the script [`fair-api-datasets-delete.py`](fair-api-datasets-delete.py):
+```sh
+python fair-api-datasets-delete.py <catalogue_id>
+```
 ## License
 
 Please contact Aridhia Informatics to license this code. 
