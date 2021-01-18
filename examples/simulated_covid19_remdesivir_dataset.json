@@ -24,7 +24,9 @@
   },
   "dictionaries": [
     {
-      "id": "simulated_covid19_remdesivir",
+      "code": "simulated_covid19_remdesivir",
+      "name": "Simulated Covid19 Remdesivir",
+      "description": "A table describing patients given Remdesivir",
       "fields": [
         {
           "name": "id",
