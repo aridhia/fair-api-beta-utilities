@@ -259,7 +259,7 @@ Rename the example CSV file with the `dictionary` > `code` that has been set in 
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
 ```sh
 python fair-api-upload.py\
-    <dataset>\
+    <dataset_code>\
     data\
     examples/<dictionary_code>.csv
 ``` 
