@@ -175,7 +175,7 @@ avocado_prices - Avocado Prices
 
 ## Create a Dataset Entry (API)
 
-In order to create metadata using the API, a JSON file should be created, conformed to the standard. This can then be posted to the service to create the dataset.
+In order to create metadata using the API, a JSON file should be created, conformed to the standard. This can then be posted to the service to create the dataset. An example is provided below or you can use the [Excel to JSON FAIR converter](https://github.com/aridhia/fair-excel-to-json) to create the correct JSON to POST to the API.
 
 Datasets are created using HTTP `POST` operations. The server validates the payload and looks for a dataset identifier in it - in the `catalogue` > `id` structure:
 
