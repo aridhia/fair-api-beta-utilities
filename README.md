@@ -324,7 +324,9 @@ python fair-api-requests-download.py
 ```
 By default, the script will download a summary list of requests to a `requests_output` in the current directory. This summary files includes the dataset name, project name, requested tables and the request status.
 
-By adding the `--detailed` flag, all contents of each request are downloaded as separate CSV files into the same `requests_output` folder
+By adding the `--detailed` flag, all contents of each request are downloaded as separate CSV files into the same `requests_output` folder.
+
+Note: this script will extract existing requests in FAIR and not previously deleted requests (via audit)
 
 ## Deleting the Dataset
 
