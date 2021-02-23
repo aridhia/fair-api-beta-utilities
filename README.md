@@ -316,6 +316,16 @@ Results from selection are in the form:
 ```
 The example above use the pattern `.data[].tablename[]` (in this case `.data[].simulated_covid19_remdesivir[]`) to extract the records into a list.
 
+## Download a Dataset's Data Access Requests
+For Data Access Request (DAR) enabled customers, a researcher or data owner can download a list of their requests using the script [`fair-api-requests-download.py`](fair-api-requests-download.py)
+
+```sh
+python fair-api-requests-download.py 
+```
+By default, the script will download a summary list of requests to a `requests_output` in the current directory. This summary files includes the dataset name, project name, requested tables and the request status.
+
+By adding the `--detailed` flag, all contents of each request are downloaded as separate CSV files into the same `requests_output` folder
+
 ## Deleting the Dataset
 
 To delete your test dataset, use the script [`fair-api-datasets-delete.py`](fair-api-datasets-delete.py):
