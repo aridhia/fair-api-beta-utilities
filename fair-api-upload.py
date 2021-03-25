@@ -14,7 +14,8 @@ if 'FAIR_API_ENDPOINT' not in os.environ:
     exit(1)
 
 if len(sys.argv) < 4:
-    print(f'Usage: {sys.argv[0]} <dataset_code> <upload_type> <upload_type>')
+    print(f'Usage: {sys.argv[0]} <entity_code> <upload_type> <upload_type>')
+    print(f'Where <entity_code> is the dataset code for attachments or dictionary code for csv upload.')
     exit(1)
 
 FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
@@ -24,7 +25,7 @@ https = 'https://'
 if FAIR_API_ENDPOINT[:5] == 'https':
     https = ''
 
-dataset_code=sys.argv[1]
+entity_code=sys.argv[1]
 upload_type=sys.argv[2]
 file_to_upload=sys.argv[3]
 
@@ -34,11 +35,11 @@ if upload_type not in ('data', 'attachments'):
 
 if not os.path.isfile(file_to_upload):
     print(f'Data file missing: {file_to_upload}')
-    exit(1) 
+    exit(1)
 
 headers = {
     'Authorization': f'Bearer {FAIR_API_TOKEN}',
-    'ARIDHIA-FAIR-Parent-Model-ID': f'{dataset_code}',
+    'ARIDHIA-FAIR-Parent-Model-ID': f'{entity_code}',
      # TODO - one could guess mime type here
     'filetype': ''
 }
@@ -48,11 +49,11 @@ metadata = {
 }
 
 if upload_type == 'attachments':
-    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{dataset_code}/attachments'
+    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/attachments'
 elif upload_type == 'data':
-    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{dataset_code}/data'
+    url = f'{https}{FAIR_API_ENDPOINT}files/dictionaries/{entity_code}/data'
 
-print(f'Dataset code: {dataset_code}')
+print(f'Entity code: {entity_code}')
 print(f'File: {file_to_upload}')
 print(f'Upload type: {upload_type}')
 print(f'Destination: {url}')
