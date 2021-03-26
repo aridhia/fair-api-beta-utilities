@@ -4,6 +4,17 @@ import json
 import sys
 
 
+CATALOGUE_FIELDS = [
+  'description',
+  'creator',
+  'contactPoint',
+  'publisher',
+  'license',
+  'versionInfo',
+  'keyword',
+  'identifier',
+  'rights',
+]
 
 if 'FAIR_API_TOKEN' not in os.environ:
     print('Please add FAIR_API_TOKEN to the environment')
@@ -43,8 +54,11 @@ headers = {
 def is_equal(original, data):
   original == data # TODO: More elaborate way of doing this
 
-def catalogue_diff(original, data):
-  pass
+def catalogue_diff(previous, current):
+  diff = {}
+  for field in CATALOGUE_FIELDS:
+    if (field in current and previous[field] != current[field]): diff[field] = current[field]
+  return diff
 
 def dictionaries_diff(original, data):
   pass
@@ -57,15 +71,14 @@ def dataset_diff(original, data):
   if 'name' in data and original['name'] != data['name']:
     diff['name'] = data['name']
   
-  catalogueUpdates = catalogue_diff(original.catalogue, data.catalogue)
-  dictionaryUpdates = dictionaries_diff(original.dictionaries, data.dictionaries)
-  if catalogueUpdates: diff['catalogues'] = catalogueUpdates
+  catalogueUpdates = catalogue_diff(original['catalogue'], data['catalogue'])
+  dictionaryUpdates = dictionaries_diff(original['dictionaries'], data['dictionaries'])
+  if catalogueUpdates: diff['catalogue'] = catalogueUpdates
   if dictionaryUpdates: diff['dictionaries'] = dictionaryUpdates
   
   return diff
 
-def patch_request(payload):
-  data = json.loads(payload)
+def patch_request(data):
   dataset_code = data['catalogue']['id']
 
   href = f'{https}{FAIR_API_ENDPOINT}datasets/{dataset_code}'
@@ -94,11 +107,13 @@ def patch_request(payload):
 
 with open(definition_file) as fh:
     payload=fh.read()
+    data=json.loads(payload)
+    print (f'POSTING {json.dumps(data, indent=2)}')
 
-    r = requests.post(dataset_list_endpoint, headers=headers, json=json.loads(payload), verify=False)
+    r = requests.post(dataset_list_endpoint, headers=headers, json=data, verify=False)
     if r.status_code == 400 and r.json()["error"]["message"] == 'Dataset already exists':
       print('already exists')
-      patch_request(payload)
+      patch_request(data)
     elif r.status_code != 201:
         data = r.json()
         print(f'Failed to create dataset: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
