@@ -2,19 +2,7 @@ import requests
 import os
 import json
 import sys
-
-
-CATALOGUE_FIELDS = [
-  'description',
-  'creator',
-  'contactPoint',
-  'publisher',
-  'license',
-  'versionInfo',
-  'keyword',
-  'identifier',
-  'rights',
-]
+from datasets.diff_helper import DiffHelper
 
 if 'FAIR_API_TOKEN' not in os.environ:
     print('Please add FAIR_API_TOKEN to the environment')
@@ -51,32 +39,8 @@ headers = {
     'Content-Type' : 'application/json'
 }
 
-def is_equal(original, data):
-  original == data # TODO: More elaborate way of doing this
-
-def catalogue_diff(previous, current):
-  diff = {}
-  for field in CATALOGUE_FIELDS:
-    if (field in current and previous[field] != current[field]): diff[field] = current[field]
-  return diff
-
-def dictionaries_diff(original, data):
-  pass
-
-def dataset_diff(original, data):
-  diff = {}
-
-  if is_equal(original, data): return diff
-  
-  if 'name' in data and original['name'] != data['name']:
-    diff['name'] = data['name']
-  
-  catalogueUpdates = catalogue_diff(original['catalogue'], data['catalogue'])
-  dictionaryUpdates = dictionaries_diff(original['dictionaries'], data['dictionaries'])
-  if catalogueUpdates: diff['catalogue'] = catalogueUpdates
-  if dictionaryUpdates: diff['dictionaries'] = dictionaryUpdates
-  
-  return diff
+def dataset_url():
+  return f'{https}{FAIR_API_ENDPOINT}datasets/'
 
 def patch_request(data):
   dataset_code = data['catalogue']['id']
@@ -89,15 +53,9 @@ def patch_request(data):
 
   print (f'ORIGINAL {json.dumps(original, indent=2)}')
   
-  diff = dataset_diff(original, data)
+  diff = DiffHelper.dataset_diff(original, data)
 
-  data['catalogue'].pop('id')
-  data['catalogue'].pop('title')
-  data['catalogue'].pop('issued')
-  data['catalogue'].pop('language')
-  data['catalogue'].pop('accessRights')
-
-  print (f'PATCHING {json.dumps(diff, indent=2)}')
+  print (f'PATCH {dataset_url()} --data {json.dumps(diff, indent=2)}')
   # href = f'{https}{FAIR_API_ENDPOINT}datasets/{dataset_code}'
   # resp = requests.patch(
   #   href, headers=headers, json=data, verify=False
