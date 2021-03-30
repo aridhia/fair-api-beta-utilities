@@ -69,7 +69,7 @@ class DiffHelper:
     return modified
 
   def is_equal(original, data):
-    retVal = (original == data) # TODO: More elaborate way of doing this
+    retVal = (original == data)
     return retVal
 
   def new_and_deleted_dictionaries(previous, current):
