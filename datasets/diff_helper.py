@@ -3,6 +3,12 @@ import os
 import json
 import sys
 
+DATASET_FIELDS = [
+  'name',
+  'workflow_key',
+  'visibility'
+]
+
 CATALOGUE_FIELDS = [
   'description',
   'creator',
@@ -24,6 +30,12 @@ DICTIONARY_FIELDS = [
 ]
 
 class DiffHelper:
+  def toplevel_diff(previous, current):
+    diff = {}
+    for field in DATASET_FIELDS:
+      if (field in current and previous[field] != current[field]): diff[field] = current[field]
+    return diff
+    
   def catalogue_diff(previous, current):
     diff = {}
     for field in CATALOGUE_FIELDS:
@@ -41,9 +53,7 @@ class DiffHelper:
 
     if DiffHelper.is_equal(original, data): return diff
     
-    if 'name' in data and original['name'] != data['name']:
-      diff['name'] = data['name']
-    
+    diff = DiffHelper.toplevel_diff(original, data)
     catalogueUpdates = DiffHelper.catalogue_diff(original['catalogue'], data['catalogue'])
     dictionaryUpdates = DiffHelper.dictionaries_diff(original['dictionaries'], data['dictionaries'])
     if catalogueUpdates: diff['catalogue'] = catalogueUpdates
@@ -60,9 +70,6 @@ class DiffHelper:
 
   def is_equal(original, data):
     retVal = (original == data) # TODO: More elaborate way of doing this
-    print (f'original: {original}')
-    print (f'new: {data}')
-    print (f'value: {retVal}')
     return retVal
 
   def new_and_deleted_dictionaries(previous, current):
@@ -81,9 +88,6 @@ class DiffHelper:
         'code': dictionary['code'],
         'toBeDeleted': True
         })
-      print ('deleted')
-      print(deletedCode)
-      print (currentCodes)
       if deletedCode in currentCodes: currentCodes.remove(deletedCode)
     return [currentCodes, dictionaries]
 
@@ -99,7 +103,6 @@ class DiffHelper:
       previousDictionary = DiffHelper.find_by_code(previous, code)
       previousDictionary = DiffHelper.sanitize_dict(previousDictionary)
       if DiffHelper.is_equal(currentDictionary, previousDictionary):
-        print (f'the 2 dictionaries are equal {currentDictionary["code"]}')
         continue
 
       if not DiffHelper.is_equal(currentDictionary.get('fields'), previousDictionary.get('fields')) or not DiffHelper.is_equal(currentDictionary.get('lookups'), previousDictionary.get('lookups')):
