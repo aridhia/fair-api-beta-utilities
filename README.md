@@ -236,7 +236,7 @@ Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
 
 It is possible to add an attachment to the dataset, so that it can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
 
-To upload an attachment, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with the `attachments` switch:
+To upload an attachment, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and the `attachments` switch:
 ```sh
 python fair-api-upload.py\
      <dataset_code>\
@@ -256,10 +256,10 @@ The FAIR data services can store structured data for subsequent selection and qu
 
 Rename the example CSV file with the `dictionary` > `code` that has been set in the JSON file. 
 
-To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the `data` switch:
+To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the dictionary code for `entity_code` and the `data` switch:
 ```sh
 python fair-api-upload.py\
-    <dataset_code>\
+    <dictionary_code>\
     data\
     examples/<dictionary_code>.csv
 ``` 
