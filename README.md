@@ -287,6 +287,20 @@ Examples:
 
 Outputs are in JSON format, but can be easily converted to CSV if needed using a tool like [`jq`](https://stedolan.github.io/jq/).
 
+## Updating a Dataset Entry (API)
+
+This section describes how the update cycle in FAIR works.
+
+To demonstrate how to update a dataset, the `fair-api-datasets-update.py` helper command can be used:
+
+1. Start by creating a JSON file conforming to the metadata specification set out in [Create a Dataset Entry](#). We will call this `dataset.json`. Post this to the API and make a note of the dataset_code.
+2. Make a change to the metadata in `dataset.json`, for example, add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes.
+3. Now call the `fair-api-datasets-update.py` command with `--dry-run` enabled. This will calculate differences and print the appropriate PATCH call that should be used to update the dataset. Running witout --dry-run will apply the change to the database:
+```
+python3 fair-api-datasets-update.py ~/project/scratch/helper_post_patch/dataset.json --dry-run
+```
+- Repeat steps 2-3 to make further updates to the dataset.
+
 ## Converting JSON output to CSV
 
 JSON data can be converted to CSV with a tool like `jq`. For example, to select data and then convert it to CSV with headers, the following script will first select data to a file, then convert it to the target format:
@@ -339,5 +353,3 @@ python fair-api-datasets-delete.py <dataset_code>
 Please contact Aridhia Informatics to license this code. 
 
 Copyright - All rights reserved (c) 2020 Aridhia Informatics.
-
-
