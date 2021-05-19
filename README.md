@@ -271,9 +271,7 @@ The image used in this example is “Flattening the curve” by Siouxsie Wiles a
 
 > This is an **early access** API and subject to change. Please send feedback so we can improved the experience.
 
-The FAIR data services can store structured data for subsequent selection and query. CSV files can be selected if their names match the **<dictionary_code>**. (Remember that a FAIR dataset can have multiple tables.)  
-
-Rename the example CSV file with the `dictionary.code` that has been set in the JSON file.
+The FAIR data services can store structured data for subsequent selection and query. (Remember that a FAIR dataset can have multiple tables.)  
 
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the dictionary code for `entity_code` and the `data` switch:
 
