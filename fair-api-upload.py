@@ -50,6 +50,8 @@ metadata = {
 
 if upload_type == 'attachments':
     url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/attachments'
+elif upload_type == 'datafiles':
+    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/data'    
 elif upload_type == 'data':
     url = f'{https}{FAIR_API_ENDPOINT}files/dictionaries/{entity_code}/data'
 
