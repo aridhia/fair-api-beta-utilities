@@ -252,7 +252,7 @@ Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
 
 > This is an **early access** API and subject to change. Please send feedback so we can improved the experience.
 
-It is possible to add an attachments and data files to the dataset, so that it they be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
+It is possible to add attachments and data files to the dataset, so that they can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
 
 To upload an attachment or data file, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and either the `attachments` or `datafiles` switch:
 
