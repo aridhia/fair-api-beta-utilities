@@ -12,7 +12,7 @@ if 'FAIR_API_ENDPOINT' not in os.environ:
     print('Please add FAIR_API_ENDPOINT to the environment')
     exit(1)
 
-DRY_RUN = True if (len(sys.argv) > 2 and sys.argv[2] == '--dry-run') else False
+DRY_RUN = len(sys.argv) > 2 and sys.argv[2] == '--dry-run'
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')

@@ -51,7 +51,7 @@ class DiffHelper:
   def dataset_diff(original, data):
     diff = {}
 
-    if DiffHelper.is_equal(original, data): return diff
+    if original == data: return diff
     
     diff = DiffHelper.toplevel_diff(original, data)
     catalogueUpdates = DiffHelper.catalogue_diff(original['catalogue'], data['catalogue'])
@@ -67,10 +67,6 @@ class DiffHelper:
       if key not in DICTIONARY_FIELDS or original[key] == None:
         modified.pop(key)
     return modified
-
-  def is_equal(original, data):
-    retVal = (original == data)
-    return retVal
 
   def new_and_deleted_dictionaries(previous, current):
     dictionaries = []
@@ -102,10 +98,10 @@ class DiffHelper:
       currentDictionary = DiffHelper.find_by_code(current, code)
       previousDictionary = DiffHelper.find_by_code(previous, code)
       previousDictionary = DiffHelper.sanitize_dict(previousDictionary)
-      if DiffHelper.is_equal(currentDictionary, previousDictionary):
+      if currentDictionary == previousDictionary:
         continue
 
-      if not DiffHelper.is_equal(currentDictionary.get('fields'), previousDictionary.get('fields')) or not DiffHelper.is_equal(currentDictionary.get('lookups'), previousDictionary.get('lookups')):
+      if currentDictionary.get('fields') != previousDictionary.get('fields') or currentDictionary.get('lookups') != previousDictionary.get('lookups'):
         dictionaries.append(currentDictionary)
       else:
         dictionaries.append({

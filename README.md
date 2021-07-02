@@ -297,7 +297,7 @@ To demonstrate how to update a dataset, the `fair-api-datasets-update.py` helper
 2. Make a change to the metadata in `dataset.json`, for example, add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes.
 3. Now call the `fair-api-datasets-update.py` command with `--dry-run` enabled. This will calculate differences and print the appropriate PATCH call that should be used to update the dataset. Running witout --dry-run will apply the change to the database:
 ```
-python3 fair-api-datasets-update.py ~/project/scratch/helper_post_patch/dataset.json --dry-run
+python fair-api-datasets-update.py ~/project/scratch/helper_post_patch/dataset.json --dry-run
 ```
 - Repeat steps 2-3 to make further updates to the dataset.
 
