@@ -29,7 +29,7 @@ entity_code=sys.argv[1]
 upload_type=sys.argv[2]
 file_to_upload=sys.argv[3]
 
-if upload_type not in ('data', 'attachments'):
+if upload_type not in ('data', 'attachments', 'datafiles'):
     print(f'Invalid upload_type: {upload_type}')
     exit(1)
 
@@ -50,6 +50,8 @@ metadata = {
 
 if upload_type == 'attachments':
     url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/attachments'
+elif upload_type == 'datafiles':
+    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/datafiles'    
 elif upload_type == 'data':
     url = f'{https}{FAIR_API_ENDPOINT}files/dictionaries/{entity_code}/data'
 

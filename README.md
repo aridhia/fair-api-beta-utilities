@@ -248,13 +248,17 @@ Search for "alzheimer's" returns 4 results
 
 Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
 
-## Upload attachments (beta API)
+## Upload resources (beta API)
 
 > This is an **early access** API and subject to change. Please send feedback so we can improved the experience.
 
-It is possible to add an attachment to the dataset, so that it can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
+It is possible to add attachments and data files to the dataset, so that they can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
 
-To upload an attachment, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and the `attachments` switch:
+To upload an attachment or data file, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and either the `attachments` or `datafiles` switch:
+
+Attachments can be any files you want to store against the dataset.
+
+Data files must be in CSV format and can be converted to dictionary data at a later stage.
 
 ```sh
 python fair-api-upload.py\
@@ -264,6 +268,8 @@ python fair-api-upload.py\
 ```
 
 Note the parameter is `attachments` not `attachment`.
+
+
 
 The image used in this example is “Flattening the curve” by Siouxsie Wiles and Toby Morris licensed CC BY-SA. see [website](https://creativecommons.org/2020/03/19/now-is-the-time-for-open-access-policies-heres-why/covid-19-curves-graphic-social-v3-1/). Thanks!
 
