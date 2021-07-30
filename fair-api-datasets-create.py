@@ -5,7 +5,9 @@ import json
 
 def post_request(data):
     print (f'\nPOST {dataset_url()} --data {json.dumps(data, indent=2)}')
-    if DRY_RUN: return
+    if DRY_RUN: 
+        print("DRY RUN - no requests sent")
+        exit(0)
 
     print('Sending request...')
     r = requests.post(dataset_url(), headers=BASE_HEADERS, json=data, verify=SSL_VERIFY)
@@ -21,7 +23,10 @@ def post_request(data):
     else:
         print(f'Expected 1 dataset in response - received {(data)}')
 
-require_args()
+if len(sys.argv) < 2:
+    print(f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
+    exit(1)
+
 with open(definition_file(sys.argv[1])) as fh:
     payload=fh.read()
     data=json.loads(payload)
