@@ -2,7 +2,7 @@ import requests
 import json
 import sys
 from datasets.diff_helper import DiffHelper
-from datasets.utilities import dataset_url, definition_file
+from datasets.utilities import dataset_url, ensure_file_exists
 from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_URL, DRY_RUN
 
 def get_request(dataset_code):
@@ -39,7 +39,7 @@ def patch_request(data):
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
     exit(1)
-with open(definition_file()) as fh:
+with open(ensure_file_exists(sys.argv[1])) as fh:
     payload=fh.read()
     data=json.loads(payload)
     patch_request(data)

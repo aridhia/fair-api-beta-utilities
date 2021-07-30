@@ -1,7 +1,9 @@
-from common.constants import DRY_RUN, FAIR_URL, BASE_HEADERS, SSL_VERIFY
-from datasets.utilities import *
 import requests
 import json
+import sys
+from common.constants import DRY_RUN, FAIR_URL, BASE_HEADERS, SSL_VERIFY
+from common.utilities import ensure_file_exists
+from datasets.utilities import *
 
 def post_request(data):
     print (f'\nPOST {dataset_url()} --data {json.dumps(data, indent=2)}')
@@ -27,7 +29,7 @@ if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
     exit(1)
 
-with open(definition_file(sys.argv[1])) as fh:
+with open(ensure_file_exists(sys.argv[1])) as fh:
     payload=fh.read()
     data=json.loads(payload)
     post_request(data)
