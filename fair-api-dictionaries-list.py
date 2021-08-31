@@ -1,14 +1,11 @@
-from dictionaries.utilities import dictionary_url
-from common.constants import BASE_HEADERS, SSL_VERIFY
-from dictionaries.utilities import dictionary_url
-import requests
-import json
 import sys
+import requests
+from common.constants import BASE_HEADERS, DICTIONARIES_URL, SSL_VERIFY
 
 if len(sys.argv) != 1:
     print(f'Usage: {sys.argv[0]}')
     exit(1)
-url = dictionary_url()
+url = DICTIONARIES_URL
 r = requests.get(url, headers=BASE_HEADERS, verify=SSL_VERIFY)
 if r.status_code != 200:
     error_data = r.json()
@@ -25,4 +22,3 @@ else:
     # TODO - handle paging (may need to run multiple calls)
     for d in data["items"]:
         print(f'{d["code"]} - {d["name"]}')
-
