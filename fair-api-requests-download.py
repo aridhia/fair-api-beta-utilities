@@ -1,10 +1,8 @@
-import requests
-import os
-import json
-import pandas as pd
-import xlsxwriter
 import argparse
 from pathlib import Path
+import requests
+import pandas as pd
+import xlsxwriter
 from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
 
 script_args=''
@@ -27,13 +25,13 @@ def parse_request_json(request_data):
             tables=[]
             for table in request_data[item]:
                 tables.append(table['name'])
-            request_json['tables']=tables    
+            request_json['tables']=tables
         elif item=='requester':
             request_json[item]=request_data[item]['email']
         else:
             request_json[item]=request_data[item]
 
-    return request_json        
+    return request_json
 
 def get_requests():
     # Call /requests to get a list of all requests
@@ -45,52 +43,51 @@ def get_requests():
         error_data = r.json()
         print(f'Failed to retrieve request list. Status code: {r.status_code}, Error message: {error_data["error"]["message"]}')
         return False
-    else:
-        data = r.json()
-        for req in data["items"]:
-            request_code=req["code"]
-            # Call /requests/{code} to get request specific information
-            request_endpoint=f'{FAIR_API_ENDPOINT}requests/{request_code}'
-            print("Retrieving data for request: " + request_code)
-            r = requests.get(request_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
-            if r.status_code != 200:
-                try:
-                    error_data = r.json()
-                    print(f'Failed to retrieve request. Status code: {r.status_code}, Error message: {error_data["error"]["message"]}')
-                except Exception as e:
-                    print(f'Failed to retrieve request. Status code: {r.status_code}')
-            else:
-                request_data = r.json()
-                requests_array.append(parse_request_json(request_data))
-                
+    data = r.json()
+    for req in data["items"]:
+        request_code=req["code"]
+        # Call /requests/{code} to get request specific information
+        request_endpoint=f'{FAIR_API_ENDPOINT}requests/{request_code}'
+        print("Retrieving data for request: " + request_code)
+        r = requests.get(request_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
+        if r.status_code != 200:
+            try:
+                error_data = r.json()
+                print(f'Failed to retrieve request. Status code: {r.status_code}, Error message: {error_data["error"]["message"]}')
+            except Exception:
+                print(f'Failed to retrieve request. Status code: {r.status_code}')
+        else:
+            request_data = r.json()
+            requests_array.append(parse_request_json(request_data))
+
     return requests_array
 
 # Generate summary request CSV
 def generate_summary_output(requests_array):
     output_folder='requests_output/'
     Path(output_folder).mkdir(parents=True, exist_ok=True)
-    
+
     fields=['dataset_name','requester','project_name','tables','status']
     request_summaries=[]
     for request in requests_array:
         request_summary={}
         for field in fields:
             request_summary[field]=request[field]
-        request_summaries.append(request_summary)    
-    
+        request_summaries.append(request_summary)
+
     df = pd.DataFrame(request_summaries)
-    df.to_csv(output_folder+'request_summary.csv', index=False) 
+    df.to_csv(output_folder+'request_summary.csv', index=False)
 
 
 def generate_detailed_output(requests_array):
     output_folder='requests_output/'
     Path(output_folder).mkdir(parents=True, exist_ok=True)
-    
+
     for request in requests_array:
         print(request)
-        df=pd.DataFrame.from_dict(request, orient='index')      
+        df=pd.DataFrame.from_dict(request, orient='index')
         print(df)
-        df.to_csv(output_folder+request['code']+'.csv',header=False) 
+        df.to_csv(output_folder+request['code']+'.csv',header=False)
 
 parse_arguments()
 requests_array=get_requests()
@@ -101,6 +98,3 @@ if script_args.detailed:
 
 print(f'Download data for {len(requests_array)} requests')
 print()
-
-
-

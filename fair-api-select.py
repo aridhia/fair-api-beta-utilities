@@ -1,7 +1,7 @@
-import requests
 import os
 import json
 import sys
+import requests
 from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
 
 if len(sys.argv) < 2:
@@ -11,7 +11,7 @@ if len(sys.argv) < 2:
 graphql_file = sys.argv[1]
 if not os.path.isfile(graphql_file):
     print(f'Data file missing: {graphql_file}')
-    exit(1) 
+    exit(1)
 
 with open(graphql_file) as fh:
     graphql = fh.read().strip()
