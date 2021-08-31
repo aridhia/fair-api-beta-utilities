@@ -4,26 +4,12 @@ from os.path import basename
 import json
 import sys
 from tusclient import client
-
-if 'FAIR_API_TOKEN' not in os.environ:
-    print('Please add FAIR_API_TOKEN to the environment')
-    exit(1)
-
-if 'FAIR_API_ENDPOINT' not in os.environ:
-    print('Please add FAIR_API_ENDPOINT to the environment')
-    exit(1)
+from common.constants import FAIR_API_ENDPOINT, FAIR_API_TOKEN
 
 if len(sys.argv) < 4:
     print(f'Usage: {sys.argv[0]} <entity_code> <upload_type> <upload_type>')
     print(f'Where <entity_code> is the dataset code for attachments or dictionary code for csv upload.')
     exit(1)
-
-FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
-FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
-https = 'https://'
-
-if FAIR_API_ENDPOINT[:5] == 'https':
-    https = ''
 
 entity_code=sys.argv[1]
 upload_type=sys.argv[2]
@@ -49,11 +35,11 @@ metadata = {
 }
 
 if upload_type == 'attachments':
-    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/attachments'
+    url = f'{FAIR_API_ENDPOINT}files/datasets/{entity_code}/attachments'
 elif upload_type == 'datafiles':
-    url = f'{https}{FAIR_API_ENDPOINT}files/datasets/{entity_code}/datafiles'    
+    url = f'{FAIR_API_ENDPOINT}files/datasets/{entity_code}/datafiles'
 elif upload_type == 'data':
-    url = f'{https}{FAIR_API_ENDPOINT}files/dictionaries/{entity_code}/data'
+    url = f'{FAIR_API_ENDPOINT}files/dictionaries/{entity_code}/data'
 
 print(f'Entity code: {entity_code}')
 print(f'File: {file_to_upload}')
