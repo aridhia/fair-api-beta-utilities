@@ -5,7 +5,6 @@ import pandas as pd
 import xlsxwriter
 import argparse
 from pathlib import Path
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
 
 script_args=''
 
@@ -37,8 +36,8 @@ def parse_request_json(request_data):
 
 def get_requests():
     # Call /requests to get a list of all requests
-    requests_list_endpoint = f'{FAIR_API_ENDPOINT}requests'
-    r = requests.get(requests_list_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
+    requests_list_endpoint = f'{https}{FAIR_API_ENDPOINT}requests'
+    r = requests.get(requests_list_endpoint, headers=headers)
     requests_array=[]
 
     if r.status_code != 200:
@@ -50,9 +49,9 @@ def get_requests():
         for req in data["items"]:
             request_code=req["code"]
             # Call /requests/{code} to get request specific information
-            request_endpoint=f'{FAIR_API_ENDPOINT}requests/{request_code}'
+            request_endpoint=f'{https}{FAIR_API_ENDPOINT}requests/{request_code}'
             print("Retrieving data for request: " + request_code)
-            r = requests.get(request_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
+            r = requests.get(request_endpoint, headers=headers)
             if r.status_code != 200:
                 try:
                     error_data = r.json()
@@ -63,7 +62,7 @@ def get_requests():
                 request_data = r.json()
                 requests_array.append(parse_request_json(request_data))
                 
-    return requests_array
+    return requests_array            
 
 # Generate summary request CSV
 def generate_summary_output(requests_array):
@@ -91,6 +90,26 @@ def generate_detailed_output(requests_array):
         df=pd.DataFrame.from_dict(request, orient='index')      
         print(df)
         df.to_csv(output_folder+request['code']+'.csv',header=False) 
+
+
+if 'FAIR_API_TOKEN' not in os.environ:
+    print('Please add FAIR_API_TOKEN to the environment')
+    exit(1)
+
+if 'FAIR_API_ENDPOINT' not in os.environ:
+    print('Please add FAIR_API_ENDPOINT to the environment')
+    exit(1)
+
+FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
+FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
+
+headers = {
+    'Authorization': f'Bearer {FAIR_API_TOKEN}'
+}
 
 parse_arguments()
 requests_array=get_requests()

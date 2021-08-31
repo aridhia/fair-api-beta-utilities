@@ -2,22 +2,40 @@ import requests
 import os
 import json
 import sys
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+
+if 'FAIR_API_TOKEN' not in os.environ:
+    print('Please add FAIR_API_TOKEN to the environment')
+    exit(1)
+
+if 'FAIR_API_ENDPOINT' not in os.environ:
+    print('Please add FAIR_API_ENDPOINT to the environment')
+    exit(1)
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <search terms>')
     exit(1)
 
+FAIR_API_TOKEN=os.environ['FAIR_API_TOKEN']
+FAIR_API_ENDPOINT=os.environ['FAIR_API_ENDPOINT']
+https = 'https://'
+
+if FAIR_API_ENDPOINT[:5] == 'https':
+    https = ''
+
 search_terms=" ".join(sys.argv[1:])
 
-search_endpoint=f'{FAIR_API_ENDPOINT}search/search'
+headers = {
+    'Authorization': f'Bearer {FAIR_API_TOKEN}'
+}
+
+search_endpoint=f'{https}{FAIR_API_ENDPOINT}search/search'
 
 params = {
     'index': 'fair-index',
     'query': search_terms   
 }
 
-r = requests.get(search_endpoint, headers=BASE_HEADERS, params=params, verify=SSL_VERIFY)
+r = requests.get(search_endpoint, headers=headers, params=params)
 
 if r.status_code != 200:
      data = r.json()
