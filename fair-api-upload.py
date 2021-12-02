@@ -5,8 +5,10 @@ from common.auth import AUTHORIZATION_HEADER
 from common.constants import FAIR_API_ENDPOINT
 
 if len(sys.argv) < 4:
-    print(f'Usage: {sys.argv[0]} <entity_code> <upload_type> <upload_type>')
+    print(f'Usage: {sys.argv[0]} <entity_code> <upload_type> <file_to_upload>')
     print('Where <entity_code> is the dataset code for attachments or dictionary code for csv upload.')
+    print('<upload_type> can be one of: data, attachments, datafiles.')
+    print('<file_to_upload> path to a file to upload as part of this request.')
     exit(1)
 
 entity_code = sys.argv[1]
