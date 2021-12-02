@@ -2,7 +2,8 @@ import os
 import json
 import sys
 import requests
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import SSL_VERIFY, FAIR_API_ENDPOINT
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <graphql_file>')
@@ -22,7 +23,7 @@ with open(graphql_file) as fh:
 
     selection_endpoint = f'{FAIR_API_ENDPOINT}selection/select'
 
-    r = requests.post(selection_endpoint, headers=BASE_HEADERS, json=payload, verify=SSL_VERIFY)
+    r = requests.post(selection_endpoint, headers=AUTHENTICATED_HEADERS, json=payload, verify=SSL_VERIFY)
     if r.status_code != 200:
         error = {
             'endpoint': selection_endpoint,

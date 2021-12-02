@@ -3,14 +3,15 @@ import sys
 import os
 import requests
 from datasets.diff_helper import DiffHelper
-from common.constants import BASE_HEADERS, FAIR_API_ENDPOINT, SSL_VERIFY, FAIR_URL, DRY_RUN
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import FAIR_API_ENDPOINT, SSL_VERIFY, FAIR_URL, DRY_RUN
 
 def dataset_url(code):
     return f"{FAIR_API_ENDPOINT}{code}"
 
 def get_request(dataset_code):
     resp = requests.get(
-        dataset_url(dataset_code), headers=BASE_HEADERS, verify=SSL_VERIFY
+        dataset_url(dataset_code), headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY
     )
     if resp.status_code != 200:
         data = resp.json()
@@ -29,7 +30,7 @@ def patch_request(data):
     print('Sending request...')
     response = requests.patch(
         dataset_url(dataset_code),
-        headers=BASE_HEADERS,
+        headers=AUTHENTICATED_HEADERS,
         json=diff,
         verify=SSL_VERIFY
     )

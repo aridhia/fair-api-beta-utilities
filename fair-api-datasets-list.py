@@ -1,8 +1,9 @@
 import requests
 # import json
-from common.constants import BASE_HEADERS, DATASETS_URL, SSL_VERIFY
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import DATASETS_URL, SSL_VERIFY
 
-response = requests.get(DATASETS_URL, headers=BASE_HEADERS, verify=SSL_VERIFY)
+response = requests.get(DATASETS_URL, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if response.status_code != 200:
     error_data = response.json()
     print(f'Failed to retrieve dataset list. Status code: {response.status_code}, Error message: {error_data["error"]["message"]}')

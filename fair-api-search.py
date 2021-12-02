@@ -1,6 +1,7 @@
 import sys
 import requests
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import SSL_VERIFY, FAIR_API_ENDPOINT
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <search terms>')
@@ -15,7 +16,7 @@ params = {
     'query': search_terms
 }
 
-response = requests.get(search_endpoint, headers=BASE_HEADERS, params=params, verify=SSL_VERIFY)
+response = requests.get(search_endpoint, headers=AUTHENTICATED_HEADERS, params=params, verify=SSL_VERIFY)
 
 if response.status_code != 200:
     data = response.json()

@@ -1,6 +1,7 @@
 import sys
 import requests
-from common.constants import BASE_HEADERS, DRY_RUN, SSL_VERIFY, DATASETS_URL
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import DRY_RUN, SSL_VERIFY, DATASETS_URL
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <code> <--dry-run>')
@@ -15,7 +16,7 @@ if DRY_RUN:
     print("DRY RUN - no requests sent")
     exit(0)
 
-r = requests.delete(url, headers=BASE_HEADERS, verify=SSL_VERIFY)
+r = requests.delete(url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if r.status_code != 204:
     data = r.json()
     print(f'Failed to delete dataset: Status code: {r.status_code}, Error message: {data["error"]["message"]}')

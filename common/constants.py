@@ -1,12 +1,6 @@
 import os
 import sys
 
-# Ensure we have set the token before setting the constant for use elsewhere
-def set_token():
-    if 'FAIR_API_TOKEN' not in os.environ:
-        print('Please add FAIR_API_TOKEN to the environment')
-        exit(1)
-    return os.environ['FAIR_API_TOKEN']
 
 # Ensure we have set the endpoint before setting the constant for use elsewhere
 def set_endpoint():
@@ -21,8 +15,6 @@ def set_endpoint():
 
     return f'{https}{provided}'
 
-# Authentication token to be passed with every authenticated endpoint in FAIR
-FAIR_API_TOKEN = set_token()
 
 # Endpoint of FAIR API, you can retrieve this from FAIR UI by viewing the "About" page
 FAIR_API_ENDPOINT = set_endpoint()
@@ -39,8 +31,7 @@ SSL_VERIFY=not(os.getenv('FAIR_API_DISABLE_SSL_VERIFY', False))
 
 # Default authenticated headers for use against authenticated endpoints
 BASE_HEADERS = {
-    'Authorization': f'Bearer {FAIR_API_TOKEN}',
-    'Content-Type' : 'application/json'
+    'Content-Type': 'application/json'
 }
 
 # Route to datasets methods

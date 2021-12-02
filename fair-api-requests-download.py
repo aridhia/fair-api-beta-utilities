@@ -3,7 +3,8 @@ from pathlib import Path
 import requests
 import pandas as pd
 import xlsxwriter
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import SSL_VERIFY, FAIR_API_ENDPOINT
 
 script_args=''
 
@@ -36,7 +37,7 @@ def parse_request_json(request_data):
 def get_requests():
     # Call /requests to get a list of all requests
     requests_list_endpoint = f'{FAIR_API_ENDPOINT}requests'
-    r = requests.get(requests_list_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
+    r = requests.get(requests_list_endpoint, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
     requests_array=[]
 
     if r.status_code != 200:
@@ -49,7 +50,7 @@ def get_requests():
         # Call /requests/{code} to get request specific information
         request_endpoint=f'{FAIR_API_ENDPOINT}requests/{request_code}'
         print("Retrieving data for request: " + request_code)
-        r = requests.get(request_endpoint, headers=BASE_HEADERS, verify=SSL_VERIFY)
+        r = requests.get(request_endpoint, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
         if r.status_code != 200:
             try:
                 error_data = r.json()

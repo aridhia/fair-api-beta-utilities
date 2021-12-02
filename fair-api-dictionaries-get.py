@@ -1,14 +1,15 @@
 import sys
 import json
 import requests
-from common.constants import DICTIONARIES_URL, SSL_VERIFY, BASE_HEADERS
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import DICTIONARIES_URL, SSL_VERIFY
 
 if len(sys.argv) != 2:
     print(f'Usage: {sys.argv[0]} <code>')
     exit(1)
 code = sys.argv[1]
 dictionary_url = f"{DICTIONARIES_URL}{code}"
-response = requests.get(dictionary_url, headers=BASE_HEADERS, verify=SSL_VERIFY)
+response = requests.get(dictionary_url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if response.status_code != 200:
     error_data = response.json()
     print(f'Failed to retrieve dictionary. Status code: {response.status_code}, Error message: {error_data["error"]["message"]}')

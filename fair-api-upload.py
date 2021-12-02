@@ -1,7 +1,8 @@
 import os
 import sys
 from tusclient import client
-from common.constants import FAIR_API_ENDPOINT, FAIR_API_TOKEN
+from common.auth import AUTHORIZATION_HEADER
+from common.constants import FAIR_API_ENDPOINT
 
 if len(sys.argv) < 4:
     print(f'Usage: {sys.argv[0]} <entity_code> <upload_type> <upload_type>')
@@ -21,7 +22,7 @@ if not os.path.isfile(file_to_upload):
     exit(1)
 
 headers = {
-    'Authorization': f'Bearer {FAIR_API_TOKEN}',
+    **AUTHORIZATION_HEADER,
     'ARIDHIA-FAIR-Parent-Model-ID': f'{entity_code}',
      #TODO: - one could guess mime type here
     'filetype': ''

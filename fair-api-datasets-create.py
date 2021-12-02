@@ -2,7 +2,8 @@ import json
 import sys
 import os
 import requests
-from common.constants import DRY_RUN, FAIR_URL, BASE_HEADERS, SSL_VERIFY, DATASETS_URL
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import DRY_RUN, FAIR_URL, SSL_VERIFY, DATASETS_URL
 
 def post_request(data):
     print (f'\nPOST {DATASETS_URL} --data {json.dumps(data, indent=2)}')
@@ -11,7 +12,7 @@ def post_request(data):
         exit(0)
 
     print('Sending request...')
-    response = requests.post(DATASETS_URL, headers=BASE_HEADERS, json=data, verify=SSL_VERIFY)
+    response = requests.post(DATASETS_URL, headers=AUTHENTICATED_HEADERS, json=data, verify=SSL_VERIFY)
     if response.status_code != 201:
         data = response.json()
         print(f'Failed to create dataset: Status code: {response.status_code}, Error message: {data["error"]["message"]}')

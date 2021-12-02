@@ -2,7 +2,8 @@ import json
 import sys
 import os
 import requests
-from common.constants import BASE_HEADERS, DICTIONARIES_URL, SSL_VERIFY, DRY_RUN
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import DICTIONARIES_URL, SSL_VERIFY, DRY_RUN
 
 def patch_request(data):
     code = data['code']
@@ -12,7 +13,7 @@ def patch_request(data):
         print("DRY RUN - no requests sent")
         return
     print('Sending request...')
-    response = requests.patch(url, headers=BASE_HEADERS, json=data, verify=SSL_VERIFY)
+    response = requests.patch(url, headers=AUTHENTICATED_HEADERS, json=data, verify=SSL_VERIFY)
     data = response.json()
     if response.status_code != 200:
         print(f'Failed to patch dataset: Status code: {response.status_code}, Error message: {data["error"]["message"]}')
