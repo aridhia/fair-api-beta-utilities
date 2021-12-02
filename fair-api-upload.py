@@ -9,9 +9,9 @@ if len(sys.argv) < 4:
     print('Where <entity_code> is the dataset code for attachments or dictionary code for csv upload.')
     exit(1)
 
-entity_code=sys.argv[1]
-upload_type=sys.argv[2]
-file_to_upload=sys.argv[3]
+entity_code = sys.argv[1]
+upload_type = sys.argv[2]
+file_to_upload = sys.argv[3]
 
 if upload_type not in ('data', 'attachments', 'datafiles'):
     print(f'Invalid upload_type: {upload_type}')
@@ -24,10 +24,10 @@ if not os.path.isfile(file_to_upload):
 headers = {
     **AUTHORIZATION_HEADER,
     'ARIDHIA-FAIR-Parent-Model-ID': f'{entity_code}',
-     #TODO: - one could guess mime type here
+    # TODO: - one could guess mime type here
     'filetype': ''
 }
-filename=os.path.basename(file_to_upload)
+filename = os.path.basename(file_to_upload)
 metadata = {
     'filename': filename
 }
@@ -50,7 +50,8 @@ try:
     client = client.TusClient(url, headers=headers)
     client.set_headers(headers)
 
-    uploader = client.uploader(file_to_upload, chunk_size=5242880, metadata=metadata)
+    uploader = client.uploader(
+        file_to_upload, chunk_size=5242880, metadata=metadata)
     uploader.upload()
     print(f'Uploading file ... {filename} ... Done')
 except Exception as e:

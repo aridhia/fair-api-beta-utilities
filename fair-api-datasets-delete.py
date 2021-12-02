@@ -19,6 +19,7 @@ if DRY_RUN:
 r = requests.delete(url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if r.status_code != 204:
     data = r.json()
-    print(f'Failed to delete dataset: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
+    print(
+        f'Failed to delete dataset: Status code: {r.status_code}, Error message: {data["error"]["message"]}')
 else:
     print(f'Deleted dataset with code: {dataset_code}')

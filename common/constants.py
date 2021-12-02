@@ -27,7 +27,7 @@ FAIR_URL = FAIR_API_ENDPOINT[:-4]
 
 # Verify TLS/SSL requests, useful for disabling in local environment,
 # should always be True in production so defaults to True
-SSL_VERIFY=not(os.getenv('FAIR_API_DISABLE_SSL_VERIFY', False))
+SSL_VERIFY = not(os.getenv('FAIR_API_DISABLE_SSL_VERIFY', False))
 
 # Default authenticated headers for use against authenticated endpoints
 BASE_HEADERS = {

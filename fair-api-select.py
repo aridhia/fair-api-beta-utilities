@@ -23,7 +23,8 @@ with open(graphql_file) as fh:
 
     selection_endpoint = f'{FAIR_API_ENDPOINT}selection/select'
 
-    r = requests.post(selection_endpoint, headers=AUTHENTICATED_HEADERS, json=payload, verify=SSL_VERIFY)
+    r = requests.post(selection_endpoint, headers=AUTHENTICATED_HEADERS,
+                      json=payload, verify=SSL_VERIFY)
     if r.status_code != 200:
         error = {
             'endpoint': selection_endpoint,

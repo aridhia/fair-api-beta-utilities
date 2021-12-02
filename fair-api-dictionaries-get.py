@@ -9,10 +9,12 @@ if len(sys.argv) != 2:
     exit(1)
 code = sys.argv[1]
 dictionary_url = f"{DICTIONARIES_URL}{code}"
-response = requests.get(dictionary_url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
+response = requests.get(
+    dictionary_url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if response.status_code != 200:
     error_data = response.json()
-    print(f'Failed to retrieve dictionary. Status code: {response.status_code}, Error message: {error_data["error"]["message"]}')
+    print(
+        f'Failed to retrieve dictionary. Status code: {response.status_code}, Error message: {error_data["error"]["message"]}')
 else:
     data = response.json()
     print(f'Dictionary at endpoint: {dictionary_url}')
