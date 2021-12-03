@@ -1,5 +1,5 @@
 import os
-from constants import BASE_HEADERS
+from common.constants import BASE_HEADERS
 
 # Ensure we have set the token before setting the constant for use elsewhere
 def set_token():
