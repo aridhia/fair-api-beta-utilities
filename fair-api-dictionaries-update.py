@@ -6,8 +6,7 @@ from common.auth import AUTHENTICATED_HEADERS
 from common.constants import DICTIONARIES_URL, SSL_VERIFY, DRY_RUN
 
 
-def patch_request(data):
-    code = data['code']
+def patch_request(code, data):
     url = f"{DICTIONARIES_URL}{code}"
     print(f'\nPATCH {url} --data {json.dumps(data, indent=2)}')
     if DRY_RUN:
@@ -29,19 +28,21 @@ def patch_request(data):
 
 
 # Script must be run with at least 1 argument
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
     print(
-        f'Usage: {sys.argv[0]} <path to dictionary patch json file> <--dry-run>')
+        f'Usage: {sys.argv[0]} <code> <path to dictionary patch json file> <--dry-run>')
     exit(1)
 
 # First argument must be a path to a file
-patch_file = sys.argv[1]
+patch_file = sys.argv[2]
 if not os.path.isfile(patch_file):
     print(
         f'Provided path "{patch_file}" does not seem to be a file, ensure the path is correct and try again')
     exit(1)
 
+code = sys.argv[1]
+
 with open(patch_file) as fh:
     payload = fh.read()
     data = json.loads(payload)
-    patch_request(data)
+    patch_request(code, data)
