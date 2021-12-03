@@ -186,7 +186,7 @@ avocado_prices - Avocado Prices
 
 ## Create a Dataset Entry (API)
 
-In order to create metadata using the API, a JSON file should be created, conformed to the standard. This can then be posted to the service to create the dataset. An example is provided below or you can use the [Excel to JSON FAIR converter](https://github.com/aridhia/fair-excel-to-json) to create the correct JSON to POST to the API.
+In order to create metadata using the API a JSON file should be created and made to conform to the standard set out in the API documentation, which can typically be found at your FAIR instance's domain with `/api/docs`, e.g. https://fair.example.org/api/docs. This can then be posted to the service to create the dataset. An example is provided below or you can use the [Excel to JSON FAIR converter](https://github.com/aridhia/fair-excel-to-json) to create the correct JSON to POST to the API.
 
 Datasets are created using HTTP `POST` operations. The server validates the payload and looks for a dataset identifier in it - in the `catalogue.id` structure:
 
@@ -195,15 +195,15 @@ Datasets are created using HTTP `POST` operations. The server validates the payl
 
 An example dataset JSON file has been provided, see [simulated_covid19_remdesivir_dataset.json](./examples/simulated_covid19_remdesivir_dataset.json), however the following attributes should be modified to something unique.
 
-- `catalogue.id`
+- `dataset.code`
 - `catalogue.title`
-- `dictionary.code`
+- `dictionary.code` (this can be omitted and the FAIR API will generate a code for you, however we will refer to this in future examples)
 
 For the purpose of these examples, we will assume that **<dataset_code>** will be the `catalogue.id` which you have just set in the JSON file.
 
-We will also assume that **<dictionary_code>** will be the `dictionary.code` which you have also just set in the JSON file.
+We will also assume that **\<dictionary_code\>** will be the `dictionary.code` which you have also just set in the JSON file.
 
-When you call the URLs in the examples you should replace **<dataset_code>** and **<dictionary_code>** with what has been set in the JSON file.
+When you call the URLs in the examples you should replace **\<dataset_code\>** and **\<dictionary_code\>** with what has been set in the JSON file.
 
 ```sh
 python fair-api-datasets-create.py ./examples/simulated_covid19_remdesivir_dataset.json
@@ -218,11 +218,11 @@ Created dataset: simulated_covid19_remdesivir_test (Ref. 296)
 View on the web at: https://fair.example.org/#/data/datasets/simulated_covid19_remdesivir_tes
 ```
 
-> Tip: During the beta testing, it can be useful to create a dataset using the API but delete it either using an HTTP `DELETE` call or using the web interface
+> Tip: During the beta testing, it can be useful to create a dataset using the API but delete it using an HTTP `DELETE` call, using the web interface, or using the [`fair-api-datasets-delete.py`](fair-api-datasets-delete.py) script.
 
 ## Search for Metadata (API)
 
-The search API be used to find datasets based on search terms - see [`fair-api-search.py`](fair-api-search.py).
+The search API can be used to find datasets based on search terms - see [`fair-api-search.py`](fair-api-search.py).
 
 ```sh
 python fair-api-search.py <search terms>
@@ -269,22 +269,20 @@ python fair-api-upload.py\
 
 Note the parameter is `attachments` not `attachment`.
 
-
-
-The image used in this example is “Flattening the curve” by Siouxsie Wiles and Toby Morris licensed CC BY-SA. see [website](https://creativecommons.org/2020/03/19/now-is-the-time-for-open-access-policies-heres-why/covid-19-curves-graphic-social-v3-1/). Thanks!
+The image used in this example is [“Flattening the curve” by Siouxsie Wiles and Toby Morris](https://creativecommons.org/2020/03/19/now-is-the-time-for-open-access-policies-heres-why/covid-19-curves-graphic-social-v3-1/) licensed CC BY-SA. Thanks!
 
 ## Upload data (beta API)
 
 > This is an **early access** API and subject to change. Please send feedback so we can improved the experience.
 
-The FAIR data services can store structured data for subsequent selection and query. (Remember that a FAIR dataset can have multiple tables.)  
+The FAIR data services can store structured data for subsequent selection and query. (Remember that a FAIR dataset can have multiple tables.)
 
 To upload data, use the script [fair-api-upload.py](fair-api-upload.py) with the dictionary code for `entity_code` and the `data` switch:
 
 ```sh
-python fair-api-upload.py\
-    <dictionary_code>\
-    data\
+python fair-api-upload.py \
+    <dictionary_code> \
+    data \
     examples/<dictionary_code>.csv
 ```
 
@@ -318,13 +316,13 @@ This section describes how the update cycle in FAIR works.
 
 To demonstrate how to update a dataset, the `fair-api-datasets-update.py` helper command can be used:
 
-1. Start by creating a JSON file conforming to the metadata specification set out in [Create a Dataset Entry](#). We will call this `dataset.json`. Post this to the API and make a note of the dataset_code.
-2. Make a change to the metadata in `dataset.json`, for example, add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes.
+1. Start by creating a JSON file conforming to the metadata specification set out in [Create a Dataset Entry](#create-a-dataset-entry-api). Post this to the API and make a note of the dataset_code. For an existing dataset you can use the [`fair-api-datasets-get.py` script](fair-api-datasets-get.py), though you will have to remove some of the additional fields from this json. With either method, we will call this `dataset.json`.
+2. Make a change to the metadata in `dataset.json`, for example, add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes. Note that any modified dictionaries must include their `id` and `code` fields.
 3. Now call the `fair-api-datasets-update.py` command with `--dry-run` enabled. This will calculate differences and print the appropriate PATCH call that should be used to update the dataset. Running witout --dry-run will apply the change to the database:
+
+```sh
+python fair-api-datasets-update.py ~/path/to/dataset.json --dry-run
 ```
-python fair-api-datasets-update.py ~/project/scratch/helper_post_patch/dataset.json --dry-run
-```
-- Repeat steps 2-3 to make further updates to the dataset.
 
 ## Converting JSON output to CSV
 
@@ -376,6 +374,108 @@ To delete your test dataset, use the script [`fair-api-datasets-delete.py`](fair
 
 ```sh
 python fair-api-datasets-delete.py <dataset_code>
+```
+
+## Dictionaries
+
+As above, ensure that the `FAIR_API_ENDPOINT` and `FAIR_API_TOKEN` are set in your environment.
+
+### List all dictionaries
+
+Run:
+
+```sh
+python fair-api-dictionaires-list.py
+```
+
+Result:
+
+```text
+Found 74 dictionaries
+
+...
+athlete_events - athlete_events
+climate70 - climate70
+golden_globe_awards - golden_globe_awards
+...
+```
+
+### Get single dictionary
+
+Run:
+
+```sh
+python fair-api-dictionaries-get.py <code>
+```
+
+Result:
+
+```text
+{
+  "id": 127,
+  "name": "synthetic_alzheimers_profile",
+  "code": "synthetic_alzheimers_profile",
+  "description": null,
+  "created_at": "2021-04-21T15:57:16.968Z",
+  "updated_at": "2021-11-09T15:00:08.262Z",
+  "fields": [
+    {
+      "name": "study_id",
+      "label": "Study ID",
+      "description": "Participant Study ID",
+      "constraints": "STUDY_ID",
+      "uri": null,
+      "pseudonymisation_rule": null,
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "label": "Site",
+      "description": "Trial Delivery Centre",
+      "constraints": "SITE",
+      "uri": null,
+      "pseudonymisation_rule": null,
+      "type": "text"
+    },
+    ...
+  ],
+  "lookups": {},
+  "dataset_id": 133
+}
+```
+
+### Update a Dictionary
+
+> Note this is separate from modifying dictionaries through datasets as described above
+
+1. Use an existing dictionary or create one as above and note it's `code`, referred to hereafter as \<dictionary_code\>.
+2. Create a JSON file which will describe your patch, we will call this the dictionary patch file.
+3. Create a JSON object in the patch file representing your desired changes, for example:
+
+    ```json
+    {
+        "description": "This is an update of the description field"
+    }
+    ```
+
+4. Run the script:
+
+    ```sh
+    python fair-api-dictionaries-update.py <dictionary_code> /path/to/dictionary/patch/file
+    ```
+
+Result:
+
+```text
+Sending request...
+Patched dictionary: simulated_covid19_remdesivir_00002
+{
+    "id": 340,
+    "name": "Simulated Covid19 Remdesivir",
+    "code": "simulated_covid19_remdesivir_00002",
+    "description": "This is an updated description",
+    ...
+}
 ```
 
 ## License
