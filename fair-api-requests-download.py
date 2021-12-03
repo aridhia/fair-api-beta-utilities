@@ -2,7 +2,6 @@ import argparse
 from pathlib import Path
 import requests
 import pandas as pd
-import xlsxwriter
 from common.auth import AUTHENTICATED_HEADERS
 from common.constants import SSL_VERIFY, FAIR_API_ENDPOINT
 
@@ -79,7 +78,7 @@ def generate_summary_output(requests_array):
     output_folder = 'requests_output/'
     Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-    fields = ['dataset_name', 'requester', 'project_name', 'tables', 'status']
+    fields = ['dataset_name', 'requester', 'tables', 'status']
     request_summaries = []
     for request in requests_array:
         request_summary = {}
