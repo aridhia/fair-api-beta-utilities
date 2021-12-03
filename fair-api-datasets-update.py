@@ -4,12 +4,10 @@ import os
 import requests
 from datasets.diff_helper import DiffHelper
 from common.auth import AUTHENTICATED_HEADERS
-from common.constants import FAIR_API_ENDPOINT, SSL_VERIFY, FAIR_URL, DRY_RUN
-
+from common.constants import DATASETS_URL, SSL_VERIFY, FAIR_URL, DRY_RUN
 
 def dataset_url(code):
-    return f"{FAIR_API_ENDPOINT}{code}"
-
+    return f"{DATASETS_URL}{code}"
 
 def get_request(dataset_code):
     resp = requests.get(
@@ -24,7 +22,7 @@ def get_request(dataset_code):
 
 
 def patch_request(data):
-    dataset_code = data['catalogue']['id']
+    dataset_code = data['code']
     resp = get_request(dataset_code)
     original = resp.json()
     diff = DiffHelper.dataset_diff(original, data)
