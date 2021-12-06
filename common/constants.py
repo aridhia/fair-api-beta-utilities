@@ -3,7 +3,7 @@ import sys
 
 
 # Ensure we have set the endpoint before setting the constant for use elsewhere
-def set_endpoint():
+def get_endpoint():
     if 'FAIR_API_ENDPOINT' not in os.environ:
         print('Please add FAIR_API_ENDPOINT to the environment')
         exit(1)
@@ -17,7 +17,7 @@ def set_endpoint():
 
 
 # Endpoint of FAIR API, you can retrieve this from FAIR UI by viewing the "About" page
-FAIR_API_ENDPOINT = set_endpoint()
+FAIR_API_ENDPOINT = get_endpoint()
 
 # Dry run means we do not send requests, but you can review what would be sent
 DRY_RUN = len(sys.argv) > 2 and sys.argv[2] == '--dry-run'

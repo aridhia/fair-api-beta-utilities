@@ -13,15 +13,15 @@ def set_token():
 FAIR_API_TOKEN = set_token()
 
 
-def set_authorized_header():
+def get_authorized_header():
     return {'Authorization': f'Bearer {FAIR_API_TOKEN}'}
 
 
-AUTHORIZATION_HEADER = set_authorized_header()
+AUTHORIZATION_HEADER = get_authorized_header()
 
 
-def set_authenticated_headers():
+def get_authenticated_headers():
     return {**BASE_HEADERS, **AUTHORIZATION_HEADER}
 
 
-AUTHENTICATED_HEADERS = set_authenticated_headers()
+AUTHENTICATED_HEADERS = get_authenticated_headers()
