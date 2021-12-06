@@ -2,12 +2,15 @@ import json
 import sys
 import os
 import requests
+from common.utilities import request_as_curl
 from datasets.diff_helper import DiffHelper
 from common.auth import AUTHENTICATED_HEADERS
 from common.constants import DATASETS_URL, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, FAIR_URL, DRY_RUN
 
+
 def dataset_url(code):
     return f"{DATASETS_URL}{code}"
+
 
 def get_request(dataset_code):
     resp = requests.get(
@@ -26,9 +29,11 @@ def patch_request(data):
     resp = get_request(dataset_code)
     original = resp.json()
     diff = DiffHelper.dataset_diff(original, data)
-    print(
-        f'\nPATCH {dataset_url(dataset_code)} --data {json.dumps(diff, indent=2)}')
+    print('This patch is equivalent to the following curl command:\n')
+    print(request_as_curl(dataset_url(dataset_code), 'PATCH', diff))
+
     if DRY_RUN:
+        print('DRY RUN - no requests sent')
         return  # In dry-run mode we do nothing past this point
     print('Sending request...')
     response = requests.patch(

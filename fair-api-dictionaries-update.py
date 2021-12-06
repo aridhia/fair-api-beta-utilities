@@ -4,11 +4,12 @@ import os
 import requests
 from common.auth import AUTHENTICATED_HEADERS
 from common.constants import DICTIONARIES_URL, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, DRY_RUN
+from common.utilities import request_as_curl
 
 
 def patch_request(code, data):
     url = f"{DICTIONARIES_URL}{code}"
-    print(f'\nPATCH {url} --data {json.dumps(data, indent=2)}')
+    print(request_as_curl(url, 'PATCH', data))
     if DRY_RUN:
         print("DRY RUN - no requests sent")
         return

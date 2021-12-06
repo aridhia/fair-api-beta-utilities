@@ -4,10 +4,11 @@ import os
 import requests
 from common.auth import AUTHENTICATED_HEADERS
 from common.constants import DRY_RUN, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, EXIT_SUCCESS, FAIR_URL, SSL_VERIFY, DATASETS_URL
+from common.utilities import request_as_curl
 
 
 def post_request(data):
-    print(f'\nPOST {DATASETS_URL} --data {json.dumps(data, indent=2)}')
+    print(request_as_curl(DATASETS_URL, 'POST', data))
     if DRY_RUN:
         print("DRY RUN - no requests sent")
         exit(EXIT_SUCCESS)
