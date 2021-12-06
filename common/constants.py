@@ -20,7 +20,7 @@ def get_endpoint():
 FAIR_API_ENDPOINT = get_endpoint()
 
 # Dry run means we do not send requests, but you can review what would be sent
-DRY_RUN = len(sys.argv) > 2 and sys.argv[2] == '--dry-run'
+DRY_RUN = len(sys.argv) > 2 and sys.argv[-1] == '--dry-run'
 
 # FAIR_API_ENDPOINT but without the trailing "/api"
 FAIR_URL = FAIR_API_ENDPOINT[:-4]
