@@ -1,11 +1,11 @@
 import os
-from common.constants import BASE_HEADERS
+from common.constants import BASE_HEADERS, EXIT_MISSING_ARGUMENTS
 
 # Ensure we have set the token before setting the constant for use elsewhere
 def set_token():
     if 'FAIR_API_TOKEN' not in os.environ:
         print('Please add FAIR_API_TOKEN to the environment')
-        exit(1)
+        exit(EXIT_MISSING_ARGUMENTS)
     return os.environ['FAIR_API_TOKEN']
 
 

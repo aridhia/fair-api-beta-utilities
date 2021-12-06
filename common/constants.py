@@ -6,7 +6,7 @@ import sys
 def get_endpoint():
     if 'FAIR_API_ENDPOINT' not in os.environ:
         print('Please add FAIR_API_ENDPOINT to the environment')
-        exit(1)
+        exit(EXIT_MISSING_ARGUMENTS)
 
     provided = os.environ['FAIR_API_ENDPOINT']
     https = 'https://'
@@ -39,3 +39,9 @@ DATASETS_URL = f"{FAIR_API_ENDPOINT}datasets/"
 
 # Route to dictionaries methods
 DICTIONARIES_URL = f"{FAIR_API_ENDPOINT}dictionaries/"
+
+EXIT_SUCCESS = 0
+
+EXIT_MISSING_ARGUMENTS = 1
+
+EXIT_FAILED_REQUEST = 2

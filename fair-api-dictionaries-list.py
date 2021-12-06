@@ -1,17 +1,18 @@
 import sys
 import requests
 from common.auth import AUTHENTICATED_HEADERS
-from common.constants import DICTIONARIES_URL, SSL_VERIFY
+from common.constants import DICTIONARIES_URL, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY
 
 if len(sys.argv) != 1:
     print(f'Usage: {sys.argv[0]}')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 url = DICTIONARIES_URL
 r = requests.get(url, headers=AUTHENTICATED_HEADERS, verify=SSL_VERIFY)
 if r.status_code != 200:
     error_data = r.json()
     print(
         f'Failed to retrieve dictionary list. Status code: {r.status_code}, Error message: {error_data["error"]["message"]}')
+    exit(EXIT_FAILED_REQUEST)
 else:
     data = r.json()
     # To output the JSON, use this

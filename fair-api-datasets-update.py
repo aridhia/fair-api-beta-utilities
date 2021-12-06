@@ -4,7 +4,7 @@ import os
 import requests
 from datasets.diff_helper import DiffHelper
 from common.auth import AUTHENTICATED_HEADERS
-from common.constants import DATASETS_URL, SSL_VERIFY, FAIR_URL, DRY_RUN
+from common.constants import DATASETS_URL, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, FAIR_URL, DRY_RUN
 
 def dataset_url(code):
     return f"{DATASETS_URL}{code}"
@@ -17,7 +17,7 @@ def get_request(dataset_code):
         data = resp.json()
         print(
             f'\nFailed to get dataset: Status code: {resp.status_code}, Error message: {data["error"]["message"]}')
-        exit(1)
+        exit(EXIT_FAILED_REQUEST)
     return resp
 
 
@@ -41,7 +41,7 @@ def patch_request(data):
     if response.status_code != 200:
         print(
             f'Failed to patch dataset: Status code: {response.status_code}, Error message: {data["error"]["message"]}')
-        exit(1)
+        exit(EXIT_FAILED_REQUEST)
     if len(data) != 1:
         print(f'Patched dataset: {data["code"]}')
         print(f'View on the web at: {FAIR_URL}#/data/datasets/{data["code"]}')
@@ -53,14 +53,14 @@ def patch_request(data):
 if len(sys.argv) < 2:
     print(
         f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 # First argument must be a path to a file
 definition_file = sys.argv[1]
 if not os.path.isfile(definition_file):
     print(
         f'Provided path "{definition_file}" does not seem to be a file, ensure the path is correct and try again')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 with open(definition_file) as fh:
     payload = fh.read()

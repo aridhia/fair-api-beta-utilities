@@ -3,7 +3,7 @@ import sys
 import os
 import requests
 from common.auth import AUTHENTICATED_HEADERS
-from common.constants import DICTIONARIES_URL, SSL_VERIFY, DRY_RUN
+from common.constants import DICTIONARIES_URL, EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, DRY_RUN
 
 
 def patch_request(code, data):
@@ -19,6 +19,7 @@ def patch_request(code, data):
     if response.status_code != 200:
         print(
             f'Failed to patch dataset: Status code: {response.status_code}, Error message: {data["error"]["message"]}')
+        exit(EXIT_FAILED_REQUEST)
     else:
         if len(data) != 1:
             print(f'Patched dictionary: {data["code"]}')
@@ -31,14 +32,14 @@ def patch_request(code, data):
 if len(sys.argv) < 3:
     print(
         f'Usage: {sys.argv[0]} <code> <path to dictionary patch json file> <--dry-run>')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 # First argument must be a path to a file
 patch_file = sys.argv[2]
 if not os.path.isfile(patch_file):
     print(
         f'Provided path "{patch_file}" does not seem to be a file, ensure the path is correct and try again')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 code = sys.argv[1]
 
