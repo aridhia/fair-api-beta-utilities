@@ -316,14 +316,14 @@ This section describes how the update cycle in FAIR works.
 
 To demonstrate how to update a dataset, the `fair-api-datasets-update.py` helper command can be used:
 
-1. Create a patch file, which we will refer to as `dataset.json`:
-   - If you don't aleady have a dataset, create a JSON file conforming to the metadata specification set out in [Create a Dataset Entry](#create-a-dataset-entry-api). Post this to the API and make a note of the dataset_code.
+1. Create a patch file, which we will call `dataset.json`:
+   - If you don't aleady have a dataset, create a JSON file conforming to the metadata specification set out in [Create a Dataset Entry](#create-a-dataset-entry-api). Post this to the API and make a note of the `dataset_code`, which we will assume is `test_dataset`.
    - For an existing dataset you can use the [`fair-api-datasets-get.py` script](fair-api-datasets-get.py) script and save the JSON output. You will have to remove some of the additional fields from this JSON, see your instance's API docs for more details.
-2. Make a change to the metadata in `dataset.json`, for example, add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes. Note that any modified dictionaries must include their `id` and `code` fields.
+2. Make a change to the metadata in `dataset.json`, for example add or remove a dictionary from the `dictionaries` list, or change some values in the `catalogue` attributes. Note that any modified dictionaries must include their `id` and `code` fields.
 3. Now call the `fair-api-datasets-update.py` command with `--dry-run` enabled. This will calculate differences and print the appropriate PATCH call that should be used to update the dataset. Running witout --dry-run will apply the change to the database:
 
 ```sh
-python fair-api-datasets-update.py ~/path/to/dataset.json --dry-run
+python fair-api-datasets-update.py test_dataset ~/path/to/dataset.json --dry-run
 ```
 
 ## Converting JSON output to CSV

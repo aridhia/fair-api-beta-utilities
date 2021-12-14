@@ -24,8 +24,7 @@ def get_request(dataset_code):
     return resp
 
 
-def patch_request(data):
-    dataset_code = data['code']
+def patch_request(data, dataset_code):
     resp = get_request(dataset_code)
     original = resp.json()
     diff = DiffHelper.dataset_diff(original, data)
@@ -54,20 +53,22 @@ def patch_request(data):
         print(f'Expected 1 dataset in response - received {(data)}')
 
 
-# Script must be run with at least 1 argument
-if len(sys.argv) < 2:
+# Script must be run with at least 2 arguments
+if len(sys.argv) < 3:
     print(
         f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
     exit(EXIT_MISSING_ARGUMENTS)
 
 # First argument must be a path to a file
-definition_file = sys.argv[1]
+definition_file = sys.argv[2]
 if not os.path.isfile(definition_file):
     print(
         f'Provided path "{definition_file}" does not seem to be a file, ensure the path is correct and try again')
     exit(EXIT_MISSING_ARGUMENTS)
 
+code = sys.argv[1]
+
 with open(definition_file) as fh:
     payload = fh.read()
     data = json.loads(payload)
-    patch_request(data)
+    patch_request(data, code)
