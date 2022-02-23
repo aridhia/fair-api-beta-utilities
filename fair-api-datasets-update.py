@@ -56,7 +56,7 @@ def patch_request(data, dataset_code):
 # Script must be run with at least 2 arguments
 if len(sys.argv) < 3:
     print(
-        f'Usage: {sys.argv[0]} <path to dataset definition json file> <--dry-run>')
+        f'Usage: {sys.argv[0]} <dataset code> <path to dataset definition json file> <--dry-run>')
     exit(EXIT_MISSING_ARGUMENTS)
 
 # First argument must be a path to a file

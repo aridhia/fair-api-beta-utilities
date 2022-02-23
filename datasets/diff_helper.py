@@ -68,6 +68,7 @@ class DiffHelper:
         modified.pop(key)
     return modified
 
+  # Note that all dictionaries must have a `code` field
   def new_and_deleted_dictionaries(previous, current):
     dictionaries = []
     currentCodes = [dictionary['code'] for dictionary in current]
