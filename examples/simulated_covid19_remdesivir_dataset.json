@@ -1,6 +1,6 @@
 {
+  "code": "simulated_covid19_remdesivir_test",
   "catalogue": {
-    "id": "simulated_covid19_remdesivir_test",
     "title": "Simulated COVID-19 Remdesivir Study (TEST)",
     "description": "Cohorts simulated from distributions reported originally in a randomised controlled trial of Remdesivir on COVID-19 patients by the ACTT-1 Study Group (doi: 10.1056/NEJMoa2007764). The original distributions in the study cohort are supplemented by variations in fictional cohorts. This dataset was developed in order to support meta-analysis efforts by the COVID-19 Workbench",
     "creator": "Aridhia Example",
@@ -24,7 +24,6 @@
   },
   "dictionaries": [
     {
-      "code": "simulated_covid19_remdesivir",
       "name": "Simulated Covid19 Remdesivir",
       "description": "A table describing patients given Remdesivir",
       "fields": [
@@ -121,125 +120,147 @@
         }
       ],
       "lookups": {
-        "SEX": [
-          {
-            "description": "Female",
-            "name": "Female"
-          },
-          {
-            "description": "Male",
-            "name": "Male"
-          },
-          {
-            "description": "Other",
-            "name": "Other"
-          }
-        ],
-        "RACE": [
-          {
-            "name": "American Indian or Alaska Native",
-            "description": ""
-          },
-          {
-            "name": "Asian",
-            "description": ""
-          },
-          {
-            "name": "Black or African American",
-            "description": ""
-          },
-          {
-            "name": "White",
-            "description": ""
-          }
-        ],
-        "ETHNICITY": [
-          {
-            "name": "Hispanic or Latino",
-            "description": ""
-          },
-          {
-            "name": "Other",
-            "description": ""
-          }
-        ],
-        "COMORBIDITY_CATEGORIES": [
-          {
-            "name": "None",
-            "description": "No co-morbidities reported"
-          },
-          {
-            "name": "One",
-            "description": "One co-morbidity reported"
-          },
-          {
-            "name": "Two or more",
-            "description": "Two or more co-morbidities reported"
-          }
-        ],
-        "RANDOMIZIATION": [
-          {
-            "name": "Remdesivir",
-            "description": "Participant was randomized to the Remdesivir arm."
-          },
-          {
-            "name": "Placebo",
-            "description": "Participant was randomized to the Placebo arm."
-          }
-        ],
-        "ORDINAL_SCORE": [
-          {
-            "name": "1",
-            "description": "Not hospitalized, no limitations on activities (1)"
-          },
-          {
-            "name": "2",
-            "description": "Not hospitalized, limitation on activities and/or requiring home oxygen (2)"
-          },
-          {
-            "name": "3",
-            "description": "Hospitalized, not requiring supplemental oxygen - no longer requires ongoing medical care (3)"
-          },
-          {
-            "name": "4",
-            "description": "Hospitalized, not requiring supplemental oxygen - requiring ongoing medical care (COVID-19 related or otherwise) (4)"
-          },
-          {
-            "name": "5",
-            "description": "Hospitalized, requiring supplemental oxygen (5)"
-          },
-          {
-            "name": "6",
-            "description": "Hospitalized, on non-invasive ventilation or high flow oxygen devices (6)"
-          },
-          {
-            "name": "7",
-            "description": "Hospitalized, on invasive mechanical ventilation or ECMO (7)"
-          },
-          {
-            "name": "8",
-            "description": "Death (8)"
-          }
-        ],
-        "TREATMENT_SUBGROUP": [
-          {
-            "name": "No Oxygen",
-            "description": "Patients Not Receiving Oxygen"
-          },
-          {
-            "name": "Oxygen",
-            "description": "Patients Receiving Oxygen"
-          },
-          {
-            "name": "High flow Oxygen",
-            "description": "Patients Receiving High-Flow Oxy. or Noninvasive Mechanical Vent."
-          },
-          {
-            "name": "Ventilation or ECMO",
-            "description": "Patients Receiving Mechanical Ventilation or ECMO"
-          }
-        ]
+        "SEX": {
+          "type": "text",
+          "options": [
+            {
+              "description": "Female",
+              "name": "Female"
+            },
+            {
+              "description": "Male",
+              "name": "Male"
+            },
+            {
+              "description": "Other",
+              "name": "Other"
+            }
+          ]
+        },
+        "RACE": {
+          "type": "text",
+          "options": [
+            {
+              "name": "American Indian or Alaska Native",
+              "description": ""
+            },
+            {
+              "name": "Asian",
+              "description": ""
+            },
+            {
+              "name": "Black or African American",
+              "description": ""
+            },
+            {
+              "name": "White",
+              "description": ""
+            }
+          ]
+        },
+        "ETHNICITY": {
+          "type": "text",
+          "options": [
+            {
+              "name": "Hispanic or Latino",
+              "description": ""
+            },
+            {
+              "name": "Other",
+              "description": ""
+            }
+          ]
+        },
+        "COMORBIDITY_CATEGORIES": {
+          "type": "text",
+          "options": [
+            {
+              "name": "None",
+              "description": "No co-morbidities reported"
+            },
+            {
+              "name": "One",
+              "description": "One co-morbidity reported"
+            },
+            {
+              "name": "Two or more",
+              "description": "Two or more co-morbidities reported"
+            }
+          ]
+        },
+        "RANDOMIZIATION": {
+          "type": "text",
+          "options": [
+            {
+              "name": "Remdesivir",
+              "description": "Participant was randomized to the Remdesivir arm."
+            },
+            {
+              "name": "Placebo",
+              "description": "Participant was randomized to the Placebo arm."
+            }
+          ]
+        },
+        "ORDINAL_SCORE": {
+          "type": "text",
+          "options": [
+            {
+              "name": "1",
+              "description": "Not hospitalized, no limitations on activities (1)"
+            },
+            {
+              "name": "2",
+              "description": "Not hospitalized, limitation on activities and/or requiring home oxygen (2)"
+            },
+            {
+              "name": "3",
+              "description": "Hospitalized, not requiring supplemental oxygen - no longer requires ongoing medical care (3)"
+            },
+            {
+              "name": "4",
+              "description": "Hospitalized, not requiring supplemental oxygen - requiring ongoing medical care (COVID-19 related or otherwise) (4)"
+            },
+            {
+              "name": "5",
+              "description": "Hospitalized, requiring supplemental oxygen (5)"
+            },
+            {
+              "name": "6",
+              "description": "Hospitalized, on non-invasive ventilation or high flow oxygen devices (6)"
+            },
+            {
+              "name": "7",
+              "description": "Hospitalized, on invasive mechanical ventilation or ECMO (7)"
+            },
+            {
+              "name": "8",
+              "description": "Death (8)"
+            }
+          ]
+        },
+        "TREATMENT_SUBGROUP": {
+          "type": "text",
+          "options": [
+            {
+              "name": "No Oxygen",
+              "description": "Patients Not Receiving Oxygen"
+            },
+            {
+              "name": "Oxygen",
+              "description": "Patients Receiving Oxygen"
+            },
+            {
+              "name": "High flow Oxygen",
+              "description": "Patients Receiving High-Flow Oxy. or Noninvasive Mechanical Vent."
+            },
+            {
+              "name": "Ventilation or ECMO",
+              "description": "Patients Receiving Mechanical Ventilation or ECMO"
+            }
+          ]
+        }
       }
     }
-  ]
+  ],
+  "visibility": "private"
 }

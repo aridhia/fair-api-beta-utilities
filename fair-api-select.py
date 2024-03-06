@@ -2,16 +2,17 @@ import os
 import json
 import sys
 import requests
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, FAIR_API_ENDPOINT
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <graphql_file>')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 graphql_file = sys.argv[1]
 if not os.path.isfile(graphql_file):
     print(f'Data file missing: {graphql_file}')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
 with open(graphql_file) as fh:
     graphql = fh.read().strip()
@@ -22,7 +23,8 @@ with open(graphql_file) as fh:
 
     selection_endpoint = f'{FAIR_API_ENDPOINT}selection/select'
 
-    r = requests.post(selection_endpoint, headers=BASE_HEADERS, json=payload, verify=SSL_VERIFY)
+    r = requests.post(selection_endpoint, headers=AUTHENTICATED_HEADERS,
+                      json=payload, verify=SSL_VERIFY)
     if r.status_code != 200:
         error = {
             'endpoint': selection_endpoint,
@@ -32,5 +34,6 @@ with open(graphql_file) as fh:
             'status_code': r.status_code
         }
         print(json.dumps(error))
+        exit(EXIT_FAILED_REQUEST)
     else:
         print(json.dumps(r.json()))

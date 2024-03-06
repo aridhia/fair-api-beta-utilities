@@ -1,29 +1,33 @@
 import sys
 import requests
-from common.constants import BASE_HEADERS, SSL_VERIFY, FAIR_API_ENDPOINT
+from common.auth import AUTHENTICATED_HEADERS
+from common.constants import EXIT_FAILED_REQUEST, EXIT_MISSING_ARGUMENTS, SSL_VERIFY, FAIR_API_ENDPOINT
 
 if len(sys.argv) < 2:
     print(f'Usage: {sys.argv[0]} <search terms>')
-    exit(1)
+    exit(EXIT_MISSING_ARGUMENTS)
 
-search_terms=" ".join(sys.argv[1:])
+search_terms = " ".join(sys.argv[1:])
 
-search_endpoint=f'{FAIR_API_ENDPOINT}search/search'
+search_endpoint = f'{FAIR_API_ENDPOINT}search/search'
 
 params = {
     'index': 'fair-index',
     'query': search_terms
 }
 
-response = requests.get(search_endpoint, headers=BASE_HEADERS, params=params, verify=SSL_VERIFY)
+response = requests.get(
+    search_endpoint, headers=AUTHENTICATED_HEADERS, params=params, verify=SSL_VERIFY)
 
 if response.status_code != 200:
     data = response.json()
-    print(f'Failed to search: Status code: {response.status_code}, Error message: {data["error"]["message"]}')
+    print(
+        f'Failed to search: Status code: {response.status_code}, Error message: {data["error"]["message"]}')
+    exit(EXIT_FAILED_REQUEST)
 else:
     results = response.json()
     hits = len(results["items"])
     print(f'Search for "{search_terms}" returns {hits} results')
     for i in results["items"]:
-        #TODO: - why catalogue__title not name?
+        # TODO: - why catalogue__title not name?
         print(f'{i["@search.score"]} - {i["code"]} - {i["catalogue__title"]}')
