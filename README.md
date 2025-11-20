@@ -50,7 +50,7 @@ Please note the following assumptions:
 - [`jq`](https://stedolan.github.io/jq/) is a useful tool for processing JSON outputs.
 - Examples are provided for a Linux environment but could be adapted to Windows environment.
 - Where python is used, we assume Python 3.
-- Uploading data and attachments requires the [`tusclient` library](https://github.com/tus/tus-py-client). This can be installed using `pip` or other tools. Ensure you have the right version for Python 3.
+- Uploading data and attachments requires the [`tuspy` library](https://github.com/tus/tus-py-client). This can be installed using `pip` or other tools. Ensure you have the right version for Python 3.
 
 ## Create a Dataset Entry (Web)
 
@@ -254,7 +254,7 @@ Try variant search terms like `alz*` (prefix match) or `alz~` (fuzzy match).
 
 It is possible to add attachments and data files to the dataset, so that they can be downloaded at the time of reading metadata. The API for this also provides the ability to upload tables of CSV data for storage and subsequent querying.
 
-To upload an attachment or data file, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and either the `attachments` or `datafiles` switch:
+To upload an attachment or data file, it is important to know the **<dataset_code>**. For example to upload an image attachment to the `simulated_covid19_remdesivir` dataset use the script [fair-api-upload.py](./fair-api-upload.py) with dataset code for `entity_code` and the `attachments` switch:
 
 Attachments can be any files you want to store against the dataset.
 
